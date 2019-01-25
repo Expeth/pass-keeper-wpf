@@ -16,6 +16,15 @@ namespace PassKeeper_WPF
         private string username;
         private string password;
 
+        public Account(string title, string note, string websiteName, string username, string password)
+        {
+            Title = title;
+            Note = note;
+            WebsiteName = websiteName;
+            Username = username;
+            Password = password;
+        }
+
         public string Title
         {
             get => title;
