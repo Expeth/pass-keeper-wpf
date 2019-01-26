@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,7 +15,7 @@ namespace PassKeeper_WPF
         private string username;
         private string password;
 
-        public IEnumerable<IRecord> Records { get; set; }
+        public IList<IRecord> Records { get; set; }
 
         public string Name
         {
@@ -28,7 +29,7 @@ namespace PassKeeper_WPF
 
         public User(string username, string password)
         {
-            Records = new List<IRecord>();
+            Records = new ObservableCollection<IRecord>();
             this.username = Name = username;
             this.password = password;
         }

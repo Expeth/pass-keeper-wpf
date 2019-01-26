@@ -10,8 +10,10 @@ using System.Windows.Input;
 
 namespace PassKeeper_WPF
 {
-    public class LoginWindowViewModel:INotifyPropertyChanged
+    public class LoginWindowViewModel : INotifyPropertyChanged
     {
+        private MainWindow mainWindow;
+        private IRepository<User> users;
         private string info;
 
         public string InformationString
@@ -24,7 +26,6 @@ namespace PassKeeper_WPF
             }
         }
         public string Username { get; set; }
-        private IRepository<User> users;
 
         public LoginWindowViewModel(IRepository<User> repository)
         {
@@ -64,15 +65,18 @@ namespace PassKeeper_WPF
             }
 
             var user = new User(Username, (obj as PasswordBox).Password);
-            bool res = (users.GetAll() as List<User>).Exists(x => x.Equals(user));
-            if (!res)
+            var res = (users.GetAll() as List<User>).Find(x => x.Equals(user));
+            if (res == null)
             {
                 InformationString = "Incorrect login or password!";
                 return;
             }
 
             InformationString = "Logged in";
-            //TODO: open mainwindow
+            mainWindow = new MainWindow();
+            mainWindow.Show();
+            mainWindow.DataContext = new MainWindowViewModel(res);
+            //TODO: close login window
         }
 
         #region Commands
