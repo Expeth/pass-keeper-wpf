@@ -23,6 +23,7 @@ namespace PassKeeper_WPF
         public LoginWindow()
         {
             InitializeComponent();
+            this.DataContext = new LoginWindowViewModel(new FileRepository<User>());
         }
     }
 }

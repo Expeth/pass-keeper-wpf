@@ -6,7 +6,112 @@
         xmlns:local="clr-namespace:PassKeeper_WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
+    <Window.Resources>
+        <Style x:Key="GradientButton" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,3">
+                        <GradientStop x:Name="GradientStop1" Color="#e0c3fc" Offset="0"/>
+                        <GradientStop x:Name="GradientStop2" Color="#8ec5fc" Offset="0.6"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Button.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                               AutoReverse="True"
+                               Storyboard.TargetProperty="(Button.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Offset)"
+                               From="0.6" To="2.0" 
+                               Duration="0:0:0.5"/>
+                            <ColorAnimation
+                               AutoReverse="True"
+                               Storyboard.TargetProperty="(Button.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"
+                               From="#8ec5fc" To="#667eea" 
+                               Duration="0:0:0.5"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="71*"></ColumnDefinition>
+            <ColumnDefinition Width="79*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Rectangle Fill="White" RadiusY="5" RadiusX="5" Grid.ColumnSpan="2" Grid.RowSpan="2"></Rectangle>
+
+        <Grid Name="leftGrid" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,5">
+                    <GradientStop Color="#667eea" Offset="0.0" />
+                    <GradientStop Color="#764ba2" Offset="0.25" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <TextBlock Foreground="White" FontSize="30"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">Pass Keeper</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="Transparent">
+            <Button                      HorizontalAlignment="Right"
+                                         VerticalAlignment="Center"
+                                         Margin="0 0 10 0"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         IsTabStop="False"
+                                         Command="{Binding CloseCommand}">
+
+            </Button>
+        </Grid>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="15">
+            <TextBlock Foreground="#1b1b1b" HorizontalAlignment="Center" FontSize="25">Log in or Sign up</TextBlock>
+            <StackPanel Margin="50 50 0 0" Orientation="Horizontal">
+
+                <TextBox Text="{Binding Username}" FontFamily="Segoi" Foreground="#1b1b1b" FontSize="15" Width="250" Margin="5"/>
+            </StackPanel>
+            <StackPanel Margin="50 15 0 0" Orientation="Horizontal">
+
+                <PasswordBox Name="password" FontFamily="Segoi" Foreground="#1b1b1b" FontSize="15" Width="250" Margin="5"/>
+            </StackPanel>
+            <TextBlock Text="{Binding InformationString}"
+                       HorizontalAlignment="Center"
+                       FontSize="15"
+                       Foreground="#ef5350"
+                       Margin="0 15 0 15"/>
+            <Button Style="{StaticResource GradientButton}" 
+                    Width="250" Height="50" 
+                    Content="LOG IN"
+                    Command="{Binding LogInCommand}"
+                    CommandParameter="{Binding ElementName=password}"/>
+            <Button Style="{StaticResource GradientButton}" 
+                    Margin="0 15 0 0" 
+                    Width="250" Height="50" 
+                    Content="SIGN UP"
+                    Command="{Binding SignUpCommand}"
+                    CommandParameter="{Binding ElementName=password}"/>
+        </StackPanel>
     </Grid>
 </Window>
