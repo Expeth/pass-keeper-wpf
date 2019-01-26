@@ -11,9 +11,9 @@ namespace PassKeeper_WPF
     {
         private IList<T> items;
 
-        public FileRepository(IList<T> value)
+        public FileRepository()
         {
-            items = value;
+            items = new List<T>();
         }
 
         public void Create(T item)

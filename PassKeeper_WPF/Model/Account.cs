@@ -25,6 +25,7 @@ namespace PassKeeper_WPF
             Password = password;
         }
 
+        #region Properties
         public string Title
         {
             get => title;
@@ -70,6 +71,7 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        #endregion
 
         public void Notify([CallerMemberName]string propName = "")
         {
