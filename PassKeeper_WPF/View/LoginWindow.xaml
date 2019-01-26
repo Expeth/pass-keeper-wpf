@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
+    <Window.DataContext>
+        <local:ViewModelLocator/>
+    </Window.DataContext>
+    
     <Window.Resources>
         <Style x:Key="GradientButton" TargetType="Button">
             <Setter Property="Background">
@@ -50,8 +54,7 @@
         </Style>
     </Window.Resources>
 
-
-    <Grid>
+    <Grid DataContext="{Binding LoginWindowViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition/>
