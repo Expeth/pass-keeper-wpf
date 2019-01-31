@@ -12,6 +12,7 @@ namespace PassKeeper_WPF
         public override void Load()
         {
             this.Bind<IRepository<User>>().To<FileRepository<User>>();
+            this.Bind<LoginWindow>();
         }
     }
 }

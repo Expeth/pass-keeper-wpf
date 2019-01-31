@@ -23,6 +23,7 @@ namespace PassKeeper_WPF
             WebsiteName = websiteName;
             Username = username;
             Password = password;
+            CreationDate = DateTime.Now;
         }
 
         #region Properties
@@ -72,6 +73,8 @@ namespace PassKeeper_WPF
             }
         }
         #endregion
+
+        public DateTime CreationDate { get; set; }
 
         public void Notify([CallerMemberName]string propName = "")
         {

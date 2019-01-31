@@ -24,5 +24,10 @@ namespace PassKeeper_WPF
         {
             InitializeComponent();
         }
+
+        public void CloseWindow()
+        {
+            Close();
+        }
     }
 }

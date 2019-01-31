@@ -13,5 +13,6 @@ namespace PassKeeper_WPF
         string WebsiteName { get; set; }
         string Username { get; set; }
         string Password { get; set; }
+        DateTime CreationDate { get; set; }
     }
 }
