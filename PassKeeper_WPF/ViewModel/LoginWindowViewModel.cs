@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,11 +12,10 @@ using System.Windows.Input;
 
 namespace PassKeeper_WPF
 {
-    public class LoginWindowViewModel : INotifyPropertyChanged
+    public class LoginWindowViewModel : PropertyChangedBase
     {
-        private LoginWindow loginWindow;
-        private MainWindow mainWindow;
         private IRepository<User> users;
+        private IWindowManager windowManager;
         private string info;
 
         public string InformationString
@@ -24,22 +24,19 @@ namespace PassKeeper_WPF
             set
             {
                 info = value;
-                Notify();
+                NotifyOfPropertyChange(() => InformationString);
             }
         }
         public string Username { get; set; }
 
-        public LoginWindowViewModel(IRepository<User> repository/*, LoginWindow wnd*/)
+        public LoginWindowViewModel(IRepository<User> repository, IWindowManager windowManager)
         {
             InformationString = "";
             users = repository;
-            //loginWindow = wnd;
-
-            LogInCommand = new RelayCommand(LogInMethod);
-            SignUpCommand = new RelayCommand(SignUpMethod);
+            this.windowManager = windowManager;
         }
 
-        private void SignUpMethod(object obj)
+        public void SignUpMethod(object obj)
         {
             if (Username == "" || (obj as PasswordBox).Password == "")
             {
@@ -59,7 +56,7 @@ namespace PassKeeper_WPF
             InformationString = "Signed up";
         }
 
-        private void LogInMethod(object obj)
+        public void LogInMethod(object obj)
         {
             if (Username == "" || (obj as PasswordBox).Password == "")
             {
@@ -76,24 +73,9 @@ namespace PassKeeper_WPF
             }
 
             InformationString = "Logged in";
-            mainWindow = new MainWindow();
-            mainWindow.Show();
-            mainWindow.DataContext = new MainWindowViewModel(res);
+            windowManager.ShowWindow(new MainWindowViewModel(user));
             //TODO: close login window
             //loginWindow.CloseWindow();
         }
-
-        #region Commands
-        public ICommand LogInCommand { get; set; }
-        public ICommand SignUpCommand { get; set; }
-        #endregion
-
-        #region PropertyChanged
-        public void Notify([CallerMemberName]string propName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
     }
 }

@@ -18,9 +18,9 @@ namespace PassKeeper_WPF
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginWindowView : Window
     {
-        public LoginWindow()
+        public LoginWindowView()
         {
             InitializeComponent();
         }
