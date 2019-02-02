@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PassKeeper_WPF
@@ -69,18 +70,37 @@ namespace PassKeeper_WPF
         #endregion
 
         public User User { get; set; }
+        public IRecord SelectedRecord { get; set; }
+        public string SelectedTheme { get; set; }
+        public string SelectedLanguage { get; set; }
 
         public MainWindowViewModel(User user)
         {
             User = user;
 
             AddRecordCommand = new RelayCommand(AddRecordMethod);
+            DeleteRecordCommand = new RelayCommand(DeleteRecordMethod);
             SortCommand = new RelayCommand(SortMethod);
-            PopupCloseCommand = new RelayCommand(
+            CloseAddRecordPopupCommand = new RelayCommand(
                 x =>
                 {
                     Title = Note = Password = Username = WebsiteName = "";
                 });
+        }
+
+        public void OpenPopup(Border wnd)
+        {
+            wnd.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        public void ClosePopup(Border wnd)
+        {
+            wnd.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void DeleteRecordMethod(object obj)
+        {
+            User.Records.Remove(SelectedRecord);
         }
 
         private void SortMethod(object obj)
@@ -121,8 +141,9 @@ namespace PassKeeper_WPF
 
         #region Commands
         public ICommand AddRecordCommand { get; set; }
+        public ICommand DeleteRecordCommand { get; set; }
         public ICommand SortCommand { get; set; }
-        public ICommand PopupCloseCommand { get; set; }
+        public ICommand CloseAddRecordPopupCommand { get; set; }
         #endregion
     }
 }

@@ -38,7 +38,7 @@ namespace PassKeeper_WPF
 
         public void Save()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Update(T item)

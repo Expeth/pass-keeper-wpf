@@ -56,9 +56,9 @@ namespace PassKeeper_WPF
             InformationString = "Signed up";
         }
 
-        public void LogInMethod(object obj)
+        public void LogInMethod(object obj, IWindow wnd)
         {
-            if (Username == "" || (obj as PasswordBox).Password == "")
+            if (string.IsNullOrEmpty(Username) || (obj as PasswordBox).Password == "")
             {
                 InformationString = "Fill all fields!";
                 return;
@@ -71,11 +71,10 @@ namespace PassKeeper_WPF
                 InformationString = "Incorrect login or password!";
                 return;
             }
-
             InformationString = "Logged in";
+
             windowManager.ShowWindow(new MainWindowViewModel(user));
-            //TODO: close login window
-            //loginWindow.CloseWindow();
+            wnd.CloseWindow();
         }
     }
 }

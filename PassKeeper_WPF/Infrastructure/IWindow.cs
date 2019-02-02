@@ -9,6 +9,5 @@ namespace PassKeeper_WPF
     public interface IWindow
     {
         void CloseWindow();
-        LoginWindowViewModel LoginViewModel { set; }
     }
 }
