@@ -15,7 +15,17 @@ namespace PassKeeper_WPF
         private string username;
         private string password;
 
-        public IList<IRecord> Records { get; set; }
+        private ObservableCollection<IRecord> records;
+
+        public ObservableCollection<IRecord> Records
+        {
+            get => records;
+            set
+            {
+                records = value;
+                Notify();
+            }
+        }
 
         public string Name
         {

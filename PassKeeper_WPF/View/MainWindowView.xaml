@@ -93,8 +93,35 @@
 
             <Grid Grid.Column="1" Name="MainGrid">
                 <StackPanel Margin="50">
+                    <WrapPanel Margin="5 0 0 15">
+                        <ComboBox Width="150">
+                            <ComboBoxItem>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Selected">
+                                        <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="Title"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                Title
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Selected">
+                                        <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="Date"></i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                Date
+                            </ComboBoxItem>
+                        </ComboBox>
+                        <TextBox Name="SearchTextBox" Style="{StaticResource TextBoxStyle}" Margin="35 0 0 0" Width="250">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </WrapPanel>
                     <TextBlock Margin="5 0 0 0" Foreground="#FE224C" FontSize="20" Text="Favorites"/>
-                    <ListView Margin="0 30 0 0" ItemsSource="{Binding User.Records}" Style="{StaticResource ListViewStyle}" 
+                    <ListView Margin="0 30 0 0" ItemsSource="{Binding UserRecords}" Style="{StaticResource ListViewStyle}" 
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"
                               ItemTemplate="{StaticResource ListViewDataTemplate}"
