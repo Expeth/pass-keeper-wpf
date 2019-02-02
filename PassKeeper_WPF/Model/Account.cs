@@ -15,14 +15,17 @@ namespace PassKeeper_WPF
         private string websiteName;
         private string username;
         private string password;
+        private string category;
+        private bool isFavorite;
 
-        public Account(string title, string note, string websiteName, string username, string password)
+        public Account(string title, string note, string websiteName, string username, string password, string category)
         {
             Title = title;
             Note = note;
             WebsiteName = websiteName;
             Username = username;
             Password = password;
+            Category = category;
             CreationDate = DateTime.Now;
         }
 
@@ -69,6 +72,24 @@ namespace PassKeeper_WPF
             set
             {
                 password = value;
+                Notify();
+            }
+        }
+        public string Category
+        {
+            get => category;
+            set
+            {
+                category = value;
+                Notify();
+            }
+        }
+        public bool IsFavorite
+        {
+            get => isFavorite;
+            set
+            {
+                isFavorite = value;
                 Notify();
             }
         }

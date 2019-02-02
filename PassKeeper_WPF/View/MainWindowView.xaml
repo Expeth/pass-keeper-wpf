@@ -42,14 +42,14 @@
                     <StackPanel Grid.Row="1" Margin="30 30 0 0">
                         <Label FontSize="12" Content="VAULTS"/>
                         <StackPanel Margin="5 15 0 15">
-                            <Button Style="{StaticResource MenuItemButton}">All passwords</Button>
-                            <Button Style="{StaticResource MenuItemButton}">Favorites</Button>
+                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="All Passwords">All passwords</Button>
+                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Favorites">Favorites</Button>
                         </StackPanel>
                         <Label Margin="0 35 0 0" FontSize="12" Content="CATEGORIES"/>
                         <StackPanel Margin="5 15 0 15">
-                            <Button Style="{StaticResource MenuItemButton}">Credit Cards</Button>
-                            <Button Style="{StaticResource MenuItemButton}">Website Accounts</Button>
-                            <Button Style="{StaticResource MenuItemButton}">Email Accounts</Button>
+                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Credit Cards">Credit Cards</Button>
+                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Website Accounts">Website Accounts</Button>
+                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Email Accounts">Email Accounts</Button>
                         </StackPanel>
 
                         <StackPanel Margin="0 35 0 15">
@@ -120,7 +120,7 @@
                             </i:Interaction.Triggers>
                         </TextBox>
                     </WrapPanel>
-                    <TextBlock Margin="5 0 0 0" Foreground="#FE224C" FontSize="20" Text="Favorites"/>
+                    <TextBlock Margin="5 0 0 0" Foreground="#FE224C" FontSize="20" Text="{Binding SelectedCategory}"/>
                     <ListView Margin="0 30 0 0" ItemsSource="{Binding UserRecords}" Style="{StaticResource ListViewStyle}" 
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -162,6 +162,11 @@
                             <TextBox Text="{Binding WebsiteName}" Margin="0 25 0 0" Style="{StaticResource TextBoxStyle}"></TextBox>
                             <TextBox Text="{Binding Username}" Margin="0 25 0 0" Style="{StaticResource TextBoxStyle}"></TextBox>
                             <TextBox Text="{Binding Password}" Margin="0 25 0 0" Style="{StaticResource TextBoxStyle}"></TextBox>
+                            <ComboBox SelectedIndex="0" SelectedValue="{Binding Category}">
+                                <ComboBoxItem>Website Account</ComboBoxItem>
+                                <ComboBoxItem>Email Account</ComboBoxItem>
+                                <ComboBoxItem>Credit Card</ComboBoxItem>
+                            </ComboBox>
                             <TextBox MaxLines="5" Text="{Binding Note}" MaxHeight="100" Margin="0 25 0 0" Style="{StaticResource TextBoxStyle}"></TextBox>
                             <Button  Height="35"
                          Margin="5 25 5 0"

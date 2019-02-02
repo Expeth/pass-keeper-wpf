@@ -13,6 +13,8 @@ namespace PassKeeper_WPF
         string WebsiteName { get; set; }
         string Username { get; set; }
         string Password { get; set; }
+        string Category { get; set; }
+        bool IsFavorite { get; set; }
         DateTime CreationDate { get; set; }
     }
 }
