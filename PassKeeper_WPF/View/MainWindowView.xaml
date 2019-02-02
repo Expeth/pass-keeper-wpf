@@ -42,7 +42,7 @@
                     <StackPanel Grid.Row="1" Margin="30 30 0 0">
                         <Label FontSize="12" Content="VAULTS"/>
                         <StackPanel Margin="5 15 0 15">
-                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="All Passwords">All passwords</Button>
+                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="All Pa sswords">All passwords</Button>
                             <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Favorites">Favorites</Button>
                         </StackPanel>
                         <Label Margin="0 35 0 0" FontSize="12" Content="CATEGORIES"/>
@@ -194,7 +194,7 @@
                                 Cancel
                             </Button>
                         </StackPanel>
-                    </md:Card>
+                    </md:Card>   
                 </Border>
 
                 <Border Name="SettingsPopup" Visibility="Hidden" VerticalAlignment="Center">

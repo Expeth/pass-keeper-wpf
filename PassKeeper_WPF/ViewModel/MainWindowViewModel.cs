@@ -23,9 +23,10 @@ namespace PassKeeper_WPF
         private string websiteName;
         private string category;
         private string selectedCategory;
+        private ObservableCollection<IRecord> userRecords;
         #endregion
 
-        #region public properties
+        #region public properties with Notify()
         public string Username
         {
             get => username;
@@ -89,14 +90,6 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
-        #endregion
-
-        public User User { get; set; }
-        public IRecord SelectedRecord { get; set; }
-        public string SelectedTheme { get; set; }
-        public string SelectedLanguage { get; set; }
-
-        private ObservableCollection<IRecord> userRecords;
         public ObservableCollection<IRecord> UserRecords
         {
             get => userRecords;
@@ -106,23 +99,31 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        #endregion
+
+        #region public properties
+        public User User { get; set; }
+        public IRecord SelectedRecord { get; set; }
+        public string SelectedTheme { get; set; }
+        public string SelectedLanguage { get; set; }
+        #endregion
 
         public MainWindowViewModel(User user)
         {
-            SelectedCategory = "All Passwords";
-            User = user;
-            UserRecords = new ObservableCollection<IRecord>(User.Records);
+            SelectedCategory            = "All Passwords";
+            User                        = user;
+            UserRecords                 = new ObservableCollection<IRecord>(User.Records);
+            AddRecordCommand            = new RelayCommand(AddRecordMethod);
+            DeleteRecordCommand         = new RelayCommand(DeleteRecordMethod);
+            SortCommand                 = new RelayCommand(SortMethod);
+            SearchCommand               = new RelayCommand(SearchMethod);
+            ChangeCategoryCommand       = new RelayCommand(ChangeCategoryMethod);
+            CloseAddRecordPopupCommand  = new RelayCommand(CleanProperties);
+        }
 
-            AddRecordCommand = new RelayCommand(AddRecordMethod);
-            DeleteRecordCommand = new RelayCommand(DeleteRecordMethod);
-            SortCommand = new RelayCommand(SortMethod);
-            SearchCommand = new RelayCommand(SearchMethod);
-            ChangeCategoryCommand = new RelayCommand(ChangeCategoryMethod);
-            CloseAddRecordPopupCommand = new RelayCommand(
-                x =>
-                {
-                    Title = Note = Password = Username = WebsiteName = "";
-                });
+        private void CleanProperties(object obj)
+        {
+            Title = Note = Password = Username = WebsiteName = "";
         }
 
         private void SearchMethod(object obj)
@@ -220,20 +221,21 @@ namespace PassKeeper_WPF
             UserRecords.Add(account);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region Commands
+        public ICommand AddRecordCommand            { get; set; }
+        public ICommand DeleteRecordCommand         { get; set; }
+        public ICommand SortCommand                 { get; set; }
+        public ICommand CloseAddRecordPopupCommand  { get; set; }
+        public ICommand SearchCommand               { get; set; }
+        public ICommand ChangeCategoryCommand       { get; set; }
+        #endregion
 
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
         public void Notify([CallerMemberName] string propName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-
-        #region Commands
-        public ICommand AddRecordCommand { get; set; }
-        public ICommand DeleteRecordCommand { get; set; }
-        public ICommand SortCommand { get; set; }
-        public ICommand CloseAddRecordPopupCommand { get; set; }
-        public ICommand SearchCommand { get; set; }
-        public ICommand ChangeCategoryCommand { get; set; }
         #endregion
     }
 }
