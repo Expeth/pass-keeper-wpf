@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CodeBits;
 
 namespace PassKeeper_WPF
 {
@@ -24,6 +25,7 @@ namespace PassKeeper_WPF
         private string category;
         private string selectedCategory;
         private ObservableCollection<IRecord> userRecords;
+        private IRepository<User> usersRepository;
         #endregion
 
         #region public properties with Notify()
@@ -108,17 +110,36 @@ namespace PassKeeper_WPF
         public string SelectedLanguage { get; set; }
         #endregion
 
-        public MainWindowViewModel(User user)
+        public MainWindowViewModel(User user, IRepository<User> users)
         {
-            SelectedCategory            = "All Passwords";
-            User                        = user;
-            UserRecords                 = new ObservableCollection<IRecord>(User.Records);
-            AddRecordCommand            = new RelayCommand(AddRecordMethod);
-            DeleteRecordCommand         = new RelayCommand(DeleteRecordMethod);
-            SortCommand                 = new RelayCommand(SortMethod);
-            SearchCommand               = new RelayCommand(SearchMethod);
-            ChangeCategoryCommand       = new RelayCommand(ChangeCategoryMethod);
-            CloseAddRecordPopupCommand  = new RelayCommand(CleanProperties);
+            SelectedCategory = "All Passwords";
+            User = user;
+            usersRepository = users;
+
+
+            //User.Records.Add(new Account("Google", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("Instagram", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("Drive", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("Telegram", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("VK", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("WhatsApp", "note", "google.com", "username", "pass", "Website Accounts"));
+
+
+
+            UserRecords = new ObservableCollection<IRecord>(User.Records);
+            AddRecordCommand = new RelayCommand(AddRecordMethod);
+            DeleteRecordCommand = new RelayCommand(DeleteRecordMethod);
+            SortCommand = new RelayCommand(SortMethod);
+            SearchCommand = new RelayCommand(SearchMethod);
+            ChangeCategoryCommand = new RelayCommand(ChangeCategoryMethod);
+            CloseAddRecordPopupCommand = new RelayCommand(CleanProperties);
+            GeneratePasswordCommand = new RelayCommand(x => Password = PasswordGenerator.Generate(new Random().Next(8, 20), PasswordCharacters.AllLetters | PasswordCharacters.Numbers));
+        }
+
+        public void CloseWindow(IWindow wnd)
+        {
+            MessageBox.Show("close window");
+            wnd.CloseWindow();
         }
 
         private void CleanProperties(object obj)
@@ -135,18 +156,8 @@ namespace PassKeeper_WPF
             }
 
             string searchString = obj as string;
-            UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x=>x.Title.Contains(searchString)));
-        }
-
-        public void OpenPopup(Border wnd)
-        {
-            wnd.Visibility = System.Windows.Visibility.Visible;
-        }
-
-        public void ClosePopup(Border wnd)
-        {
-            wnd.Visibility = System.Windows.Visibility.Hidden;
-        }
+            UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Title.Contains(searchString) /*&& x.Category == SelectedCategory*/));
+        } 
 
         private void DeleteRecordMethod(object obj)
         {
@@ -189,17 +200,17 @@ namespace PassKeeper_WPF
                     break;
                 case "Website Accounts":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Website Account"));
+                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Website Accounts"));
                     }
                     break;
                 case "Email Accounts":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Email Account"));
+                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Email Accounts"));
                     }
                     break;
                 case "Credit Cards":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Credit Card"));
+                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Credit Cards"));
                     }
                     break;
                 case "Favorites":
@@ -214,20 +225,26 @@ namespace PassKeeper_WPF
 
         private void AddRecordMethod(object obj)
         {
-            Category = String.IsNullOrEmpty(Category) ? "Website Account" : Category.Remove(0, 38);  
+            try
+            {
+                Category = String.IsNullOrEmpty(Category) ? "Website Accounts" : Category.Remove(0, 38);
+            }
+            catch (Exception ex) { }
 
             var account = new Account(Title, Note, WebsiteName, Username, Password, Category);
             User.Records.Add(account);
             UserRecords.Add(account);
+            //usersRepository.Update(User);
         }
 
         #region Commands
-        public ICommand AddRecordCommand            { get; set; }
-        public ICommand DeleteRecordCommand         { get; set; }
-        public ICommand SortCommand                 { get; set; }
-        public ICommand CloseAddRecordPopupCommand  { get; set; }
-        public ICommand SearchCommand               { get; set; }
-        public ICommand ChangeCategoryCommand       { get; set; }
+        public ICommand AddRecordCommand { get; set; }
+        public ICommand DeleteRecordCommand { get; set; }
+        public ICommand SortCommand { get; set; }
+        public ICommand CloseAddRecordPopupCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public ICommand ChangeCategoryCommand { get; set; }
+        public ICommand GeneratePasswordCommand { get; set; }
         #endregion
 
         #region PropertyChanged

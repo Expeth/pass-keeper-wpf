@@ -73,7 +73,7 @@ namespace PassKeeper_WPF
             }
             InformationString = "Logged in";
 
-            windowManager.ShowWindow(new MainWindowViewModel(user));
+            windowManager.ShowWindow(new MainWindowViewModel(res, users));
             wnd.CloseWindow();
         }
     }

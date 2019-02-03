@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace PassKeeper_WPF
 {
+    [Serializable]
     public class User : INotifyPropertyChanged
     {
         private string name;

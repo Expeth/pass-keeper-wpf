@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CodeBits\PasswordGenerator.cs" />
     <Compile Include="Infrastructure\IWindow.cs" />
     <Compile Include="Infrastructure\MyBootstrapper.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

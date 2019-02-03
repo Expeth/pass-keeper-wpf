@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PassKeeper_WPF
 {
+    [Serializable]
     public class Account : IRecord, INotifyPropertyChanged
     {
         private string title;
@@ -20,12 +21,12 @@ namespace PassKeeper_WPF
 
         public Account(string title, string note, string websiteName, string username, string password, string category)
         {
-            Title = title;
-            Note = note;
-            WebsiteName = websiteName;
-            Username = username;
-            Password = password;
-            Category = category;
+            Title = title == null ? "" : title;
+            Note = note == null ? "" : note;
+            WebsiteName = websiteName == null ? "" : websiteName;
+            Username = username == null ? "" : username;
+            Password = password == null ? "" : password;
+            Category = category == null ? "" : category;
             CreationDate = DateTime.Now;
         }
 

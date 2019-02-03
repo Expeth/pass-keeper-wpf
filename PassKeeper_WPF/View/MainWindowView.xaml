@@ -11,254 +11,362 @@
         x:Name="MainWindow"
         Title="MainWindow" Height="610" Width="1060"
         WindowStartupLocation="CenterScreen"
-        FontFamily="SF UI Text Semibold"
+        FontFamily="SF UI Text"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CornerRadius="7" ResizeBorderThickness="7"/>
     </WindowChrome.WindowChrome>
 
-    <Border Name="MainBorder" Style="{StaticResource MainGrid}">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="183"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+    <Window.Resources>
+        <Storyboard x:Key="OpenAddRecordDialog">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="Width"
+                Storyboard.TargetName="AddRecordDialog">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="230"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
+                                                    Storyboard.TargetName="AddRecordDialog">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
 
-            <Border Grid.Column="0" Style="{StaticResource MenuGrid}">
+        <Storyboard x:Key="CloseAddRecordDialog">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="Width"
+                Storyboard.TargetName="AddRecordDialog">
+                <EasingDoubleKeyFrame KeyTime="0" Value="230"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
+                                                    Storyboard.TargetName="AddRecordDialog">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="OpenEditRecordDialog">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="Width"
+                Storyboard.TargetName="EditRecordDialog">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="230"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
+                                                    Storyboard.TargetName="EditRecordDialog">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="CloseEditRecordDialog">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="Width"
+                Storyboard.TargetName="EditRecordDialog">
+                <EasingDoubleKeyFrame KeyTime="0" Value="230"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
+                                                    Storyboard.TargetName="EditRecordDialog">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="OpenAddRecordDialogButton">
+            <BeginStoryboard Storyboard="{StaticResource OpenAddRecordDialog}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseAddRecordDialogButton">
+            <BeginStoryboard Storyboard="{StaticResource CloseAddRecordDialog}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="AddRecordButton">
+            <BeginStoryboard Storyboard="{StaticResource CloseAddRecordDialog}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseEditRecordDialogButton">
+            <BeginStoryboard Storyboard="{StaticResource CloseEditRecordDialog}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ListView.SelectionChanged" SourceName="Records">
+            <BeginStoryboard Storyboard="{StaticResource OpenEditRecordDialog}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Border Style="{StaticResource MainBorderStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource NavigationMenuStyle}">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="33*"/>
-                        <RowDefinition Height="492*"/>
-                        <RowDefinition Height="85*"/>
-                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="353*"/>
+                        <ColumnDefinition Width="353"/>
+                        <ColumnDefinition Width="353*"/>
+                    </Grid.ColumnDefinitions>
 
                     <WrapPanel Grid.Row="0" Margin="15 15 0 0">
-                        <Button Style="{StaticResource RoundedButton}" Width="10" Height="10"/>
-                        <Button Style="{StaticResource RoundedButton}" Width="10" Height="10" Margin="5 0 0 0"/>
-                        <Button Style="{StaticResource RoundedButton}" Width="10" Height="10" Margin="5 0 0 0"/>
+                        <Button Style="{StaticResource RoundedButton}" Background="#FF6258" Width="10" Height="10">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Button.Click">
+                                    <cal:ActionMessage MethodName="CloseWindow">
+                                        <cal:Parameter Value="{Binding ElementName=MainWindow}"/>
+                                    </cal:ActionMessage>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button Style="{StaticResource RoundedButton}" Background="#FFBF2F" Width="10" Height="10" Margin="5 0 0 0"/>
+                        <Button Style="{StaticResource RoundedButton}" Background="#2ACB42" Width="10" Height="10" Margin="5 0 0 0"/>
                     </WrapPanel>
 
-                    <StackPanel Grid.Row="1" Margin="30 30 0 0">
-                        <Label FontSize="12" Content="VAULTS"/>
-                        <StackPanel Margin="5 15 0 15">
-                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="All Pa sswords">All passwords</Button>
-                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Favorites">Favorites</Button>
-                        </StackPanel>
-                        <Label Margin="0 35 0 0" FontSize="12" Content="CATEGORIES"/>
-                        <StackPanel Margin="5 15 0 15">
-                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Credit Cards">Credit Cards</Button>
-                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Website Accounts">Website Accounts</Button>
-                            <Button Style="{StaticResource MenuItemButton}" Command="{Binding ChangeCategoryCommand}" CommandParameter="Email Accounts">Email Accounts</Button>
-                        </StackPanel>
+                    <Grid Grid.Column="0" Margin="120 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                        <StackPanel Margin="0 35 0 15">
-                            <Button Content="Add Record" Style="{StaticResource MenuItemButton}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <cal:ActionMessage MethodName="OpenPopup">
-                                            <cal:Parameter Value="{Binding ElementName=AddRecordPopup}"/>
-                                        </cal:ActionMessage>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Button>
-                            <Button Style="{StaticResource MenuItemButton}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <cal:ActionMessage MethodName="OpenPopup">
-                                            <cal:Parameter Value="{Binding ElementName=SettingsPopup}"/>
-                                        </cal:ActionMessage>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                Settings
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-
-                    <Border Grid.Row="2" Margin="15" Style="{StaticResource MainGrid}">
-                        <StackPanel Margin="10 0 0 0" Orientation="Horizontal">
-                            <Ellipse Height="35" Width="35">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="F:\Downloads\photo_2018-12-21_14-39-09.jpg"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <StackPanel Margin="15 10 0 0">
-                                <TextBlock Text="{Binding User.Name}"/>
-                                <TextBlock Margin="0 3 0 0" Text="Email" FontSize="10" FontWeight="Thin"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </Grid>
-            </Border>
-
-            <Grid Grid.Column="1" Name="MainGrid">
-                <StackPanel Margin="50">
-                    <WrapPanel Margin="5 0 0 15">
-                        <ComboBox Width="150">
-                            <ComboBoxItem>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Selected">
-                                        <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="Title"></i:InvokeCommandAction>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                Title
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Selected">
-                                        <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="Date"></i:InvokeCommandAction>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                Date
-                            </ComboBoxItem>
-                        </ComboBox>
-                        <TextBox Name="SearchTextBox" Style="{StaticResource TextBoxStyle}" Margin="35 0 0 0" Width="250">
+                        <md:PackIcon Kind="Magnify" Opacity=".56" Margin="0 22 0 0"/>
+                        <TextBox Name="SearchTextBox"
+                                 Grid.Column="1"
+                                 Margin="8 0 0 0"
+                                 BorderThickness="0"
+                                 md:HintAssist.Hint="Search in PassKeeper..."
+                                 md:TextFieldAssist.DecorationVisibility="Hidden"
+                                 MinWidth="200"
+                                 VerticalAlignment="Center">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}"></i:InvokeCommandAction>
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}"
+                                                           CommandParameter="{Binding ElementName=SearchTextBox, Path=Text}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
-                    </WrapPanel>
-                    <TextBlock Margin="5 0 0 0" Foreground="#FE224C" FontSize="20" Text="{Binding SelectedCategory}"/>
-                    <ListView Margin="0 30 0 0" ItemsSource="{Binding UserRecords}" Style="{StaticResource ListViewStyle}" 
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto"
-                              ItemTemplate="{StaticResource ListViewDataTemplate}"
-                              SelectedValue="{Binding SelectedRecord}">
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                    </ListView>
-                </StackPanel>
+                    </Grid>
 
-                <Border Name="AddRecordPopup" Visibility="Hidden" VerticalAlignment="Center">
-                    <Border.Style>
-                        <Style>
-                            <Style.Triggers>
-                                <Trigger Property="Border.Visibility" Value="Visible">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetProperty="Width"
-                                                    From="0" To="450" Duration="0:0:0.3"/>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetProperty="Height"
-                                                    From="0" To="550" Duration="0:0:0.3"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                </Trigger>
+                    <Grid Grid.Column="2">
+                        <TextBlock HorizontalAlignment="Right" Margin="0 15 70 0" Text="{Binding User.Name}"/>
+                        <TextBlock HorizontalAlignment="Right" Margin="0 30 70 0" Text="{Binding User.Name}"/>
 
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <md:Card HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="450" Margin="35" Background="White">
-                        <StackPanel Margin="10 20 10 10" Background="White">
-                            <TextBox Text="{Binding Title}" Style="{StaticResource TextBoxStyle}"></TextBox>
-                            <TextBox Text="{Binding WebsiteName}" Margin="0 25 0 0" Style="{StaticResource TextBoxStyle}"></TextBox>
-                            <TextBox Text="{Binding Username}" Margin="0 25 0 0" Style="{StaticResource TextBoxStyle}"></TextBox>
-                            <TextBox Text="{Binding Password}" Margin="0 25 0 0" Style="{StaticResource TextBoxStyle}"></TextBox>
-                            <ComboBox SelectedIndex="0" SelectedValue="{Binding Category}">
-                                <ComboBoxItem>Website Account</ComboBoxItem>
-                                <ComboBoxItem>Email Account</ComboBoxItem>
-                                <ComboBoxItem>Credit Card</ComboBoxItem>
-                            </ComboBox>
-                            <TextBox MaxLines="5" Text="{Binding Note}" MaxHeight="100" Margin="0 25 0 0" Style="{StaticResource TextBoxStyle}"></TextBox>
-                            <Button  Height="35"
-                         Margin="5 25 5 0"
-                         Style="{StaticResource FilledButton}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <i:InvokeCommandAction Command="{Binding AddRecordCommand}"/>
-                                        <cal:ActionMessage MethodName="ClosePopup">
-                                            <cal:Parameter Value="{Binding ElementName=AddRecordPopup}"/>
-                                        </cal:ActionMessage>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                Add
-                            </Button>
-                            <Button  Height="37"
-                         Margin="10 25 10 0"
-                         Style="{StaticResource NonFilledButton}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <cal:ActionMessage MethodName="ClosePopup">
-                                            <cal:Parameter Value="{Binding ElementName=AddRecordPopup}"/>
-                                        </cal:ActionMessage>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                Cancel
-                            </Button>
-                        </StackPanel>
-                    </md:Card>   
-                </Border>
+                        <md:PopupBox Padding="25" HorizontalAlignment="Right" Margin="0 0 10 0">
+                            <StackPanel>
+                                <TextBlock HorizontalAlignment="Center" Margin="0 0 0 20" FontSize="20" Text="Settings"></TextBlock>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                <Border Name="SettingsPopup" Visibility="Hidden" VerticalAlignment="Center">
-                    <Border.Style>
-                        <Style>
-                            <Style.Triggers>
-                                <Trigger Property="Border.Visibility" Value="Visible">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetProperty="Width"
-                                                    From="0" To="450" Duration="0:0:0.3"/>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetProperty="Height"
-                                                    From="0" To="550" Duration="0:0:0.3"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                </Trigger>
+                                    <TextBlock Grid.Column="0" Margin="5 10 5 5" Text="Language"></TextBlock>
+                                    <ComboBox Grid.Column="1" Margin="15 5 5 5" SelectedIndex="0" FontSize="12">
+                                        <ComboBoxItem Content="English"/>
+                                        <ComboBoxItem Content="Русский"/>
+                                        <ComboBoxItem Content="Українська"/>
+                                        <ComboBoxItem Content="Francaise"/>
+                                    </ComboBox>
 
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <md:Card HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="450" Margin="35" Background="White">
-                        <StackPanel Margin="10 20 10 10" Background="White">
-                            <TextBox Text="{Binding User.Name}" Style="{StaticResource TextBoxStyle}"></TextBox>
-                            <ComboBox Text="Theme" SelectedIndex="0"  SelectedValue="{Binding SelectedTheme}">
-                                <ComboBoxItem>Light</ComboBoxItem>
-                                <ComboBoxItem>Dark</ComboBoxItem>
-                            </ComboBox>
-                            <ComboBox Text="Language" SelectedIndex="0" SelectedValue="{Binding SelectedLanguage}">
-                                <ComboBoxItem>English</ComboBoxItem>
-                                <ComboBoxItem>Russian</ComboBoxItem>
-                            </ComboBox>
-                            <Button  Height="35"
-                         Margin="5 25 5 0"
-                         Style="{StaticResource FilledButton}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <i:InvokeCommandAction Command="{Binding SaveChangesCommand}"/>
-                                        <cal:ActionMessage MethodName="ClosePopup">
-                                            <cal:Parameter Value="{Binding ElementName=SettingsPopup}"/>
-                                        </cal:ActionMessage>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                Save
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="5 10 5 5" Text="Theme"></TextBlock>
+                                    <ComboBox Grid.Column="1" Grid.Row="1" Margin="15 5 5 5" SelectedIndex="0" FontSize="12">
+                                        <ComboBoxItem Content="Dark"/>
+                                        <ComboBoxItem Content="Light"/>
+                                    </ComboBox>
+                                </Grid>
+                            </StackPanel>
+                        </md:PopupBox>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource MainGridStyle}">
+                <Grid Margin="40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Name="Row"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="OptionsColumn" Width="211*"/>
+                        <ColumnDefinition Width="709*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Padding="20 20 20 0" CornerRadius="5" Grid.Column="0" Background="White">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="ORDER BY" Foreground="#585F76" FontSize="15" FontWeight="SemiBold"></TextBlock>
+                                <RadioButton Margin="0 10 0 0" Content="Title">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Checked">
+                                            <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="Title"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </RadioButton>
+                                <RadioButton Content="Website Name">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Checked">
+                                            <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="WebsiteName"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </RadioButton>
+                                <RadioButton Content="Creation Date">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Checked">
+                                            <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="Date"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </RadioButton>
+
+                                <TextBlock Margin="0 65 0 0" Text="CATEGORIES" Foreground="#585F76" FontSize="15" FontWeight="SemiBold"></TextBlock>
+                                <ListView Cursor="Hand" Margin="0 15 0 0" Style="{StaticResource MenuListViewStyle}">
+                                    <ListViewItem IsSelected="True" Style="{StaticResource MenuItemStyle}"
+                                                  Content="All Records">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Selected">
+                                                <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
+                                                                       CommandParameter="All Passwords"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListViewItem>
+                                    <ListViewItem Style="{StaticResource MenuItemStyle}"
+                                                  Content="Favorites">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Selected">
+                                                <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
+                                                                       CommandParameter="Favorites"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListViewItem>
+                                    <ListViewItem Style="{StaticResource MenuItemStyle}"
+                                                  Content="Website Accounts">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Selected">
+                                                <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
+                                                                       CommandParameter="Website Accounts"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListViewItem>
+                                    <ListViewItem Style="{StaticResource MenuItemStyle}"
+                                                  Content="Email Accounts">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Selected">
+                                                <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
+                                                                       CommandParameter="Email Accounts"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListViewItem>
+                                    <ListViewItem Style="{StaticResource MenuItemStyle}"
+                                                  Content="Credit Cards">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Selected">
+                                                <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
+                                                                       CommandParameter="Credit Cards"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ListViewItem>
+                                </ListView>
+                            </StackPanel>
+                            <Button Name="OpenAddRecordDialogButton"
+                                    Margin="0 10 0 15" VerticalAlignment="Bottom"
+                                    Background="#FE224C" 
+                                    Cursor="Hand"
+                                    Content="Add Record">
                             </Button>
-                            <Button  Height="37"
-                         Margin="10 25 10 0"
-                         Style="{StaticResource NonFilledButton}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <cal:ActionMessage MethodName="ClosePopup">
-                                            <cal:Parameter Value="{Binding ElementName=SettingsPopup}"/>
-                                        </cal:ActionMessage>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                Cancel
-                            </Button>
-                        </StackPanel>
-                    </md:Card>
-                </Border>
-            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <DockPanel Grid.Column="1">
+                        <Border Padding="20 20 20 0" Width="0" Name="AddRecordDialog" CornerRadius="5" DockPanel.Dock="Right" Visibility="Hidden" Background="White">
+                            <StackPanel>
+                                <TextBlock Text="Title"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                         Text="{Binding Title}"></TextBox>
+                                <TextBlock Margin="0 15 0 0" Text="Username"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                         Text="{Binding Username}"></TextBox>
+                                <WrapPanel>
+                                    <TextBlock Margin="0 15 0 0" Text="Password"></TextBlock>
+                                    <Button FontSize="10" Margin="15 15 0 0" HorizontalAlignment="Right" Style="{StaticResource MenuItemButton}" Content="(Generate)"
+                                            Command="{Binding GeneratePasswordCommand}"/>
+                                </WrapPanel>
+                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                         Text="{Binding Password}"></TextBox>
+                                <TextBlock Margin="0 15 0 0" Text="Website URL"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                         Text="{Binding WebsiteName}"></TextBox>
+                                <TextBlock Margin="0 15 0 0" Text="Category"></TextBlock>
+                                <ComboBox Margin="10" SelectedItem="{Binding Category}">
+                                    <ComboBoxItem Content="Website Accounts"/>
+                                    <ComboBoxItem Content="Email Accounts"/>
+                                    <ComboBoxItem Content="Credit Cards"/>
+                                </ComboBox>
+                                <Button Margin="0 15 0 0" 
+                                        Background="#FE224C"
+                                        Name="AddRecordButton"
+                                        Content="Add Record"
+                                        Command="{Binding AddRecordCommand}">
+                                </Button>
+                                <Button Margin="0 15 0 0" 
+                                        Background="#FE224C"
+                                        Name="CloseAddRecordDialogButton"
+                                        Content="Cancel">
+
+                                </Button>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Padding="20 20 20 0" Width="0" Name="EditRecordDialog" CornerRadius="5" DockPanel.Dock="Right" Visibility="Hidden" Background="White">
+                            <StackPanel>
+                                <TextBlock Text="Title"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.Title}"></TextBox>
+                                <TextBlock Margin="0 15 0 0" Text="Username"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.Username}"></TextBox>
+                                <WrapPanel>
+                                    <TextBlock Margin="0 15 0 0" Text="Password"></TextBlock>
+                                    <Button FontSize="10" Margin="15 15 0 0" HorizontalAlignment="Right" Style="{StaticResource MenuItemButton}" Content="(Generate)"/>
+                                </WrapPanel>
+                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.Password}"></TextBox>
+                                <TextBlock Margin="0 15 0 0" Text="Website URL"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.WebsiteName}"></TextBox>
+                                <TextBlock Margin="0 15 0 0" Text="Category"></TextBlock>
+                                <ComboBox Margin="10" SelectedValue="{Binding Category}">
+                                    <ComboBoxItem Content="Website Account"/>
+                                    <ComboBoxItem Content="Email Account"/>
+                                    <ComboBoxItem Content="Credit Card"/>
+                                </ComboBox>
+                                <Button Margin="0 15 0 0" Background="#FE224C" Name="CloseEditRecordDialogButton">Cancel</Button>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Margin="25 0 25 0" DockPanel.Dock="Left" Name="MainGrid" Padding="20 20 20 0" CornerRadius="5" Background="White">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="32"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Foreground="#585F76" Text="{Binding SelectedCategory}" FontSize="15" FontWeight="SemiBold"/>
+
+                                <ListView Padding="0 0 0 15" Grid.Row="1" x:Name="Records" 
+                                          Style="{StaticResource MainListViewStyle}"
+                                          ItemTemplate="{StaticResource CardListViewItemDataTemplate}"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                          ItemsSource="{Binding UserRecords}"
+                                          SelectedValue="{Binding SelectedRecord}">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                </ListView>
+                            </Grid>
+                        </Border>
+                    </DockPanel>
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 </Window>

@@ -17,11 +17,17 @@ namespace PassKeeper_WPF
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindowView : Window
+    public partial class MainWindowView : Window, IWindow
     {
         public MainWindowView()
         {
             InitializeComponent();
+           // WindowBlur.SetIsEnabled(this, true);
+        }
+
+        public void CloseWindow()
+        {
+            this.Close();
         }
     }
 }
