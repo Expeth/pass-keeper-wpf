@@ -148,8 +148,24 @@
 
                                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="5 10 5 5" Text="{DynamicResource Theme}"></TextBlock>
                                     <ComboBox Foreground="{DynamicResource ForegroundColor}" Grid.Column="1" Grid.Row="1" Margin="15 5 5 5" SelectedIndex="0" FontSize="12">
-                                        <ComboBoxItem Content="{DynamicResource LightTheme}"/>
-                                        <ComboBoxItem Content="{DynamicResource DarkTheme}"/>
+                                        <ComboBoxItem Content="{DynamicResource LightTheme}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Selected">
+                                                    <cal:ActionMessage MethodName="ChangeTheme">
+                                                        <cal:Parameter Value="LightTheme"></cal:Parameter>
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem Content="{DynamicResource DarkTheme}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Selected">
+                                                    <cal:ActionMessage MethodName="ChangeTheme">
+                                                        <cal:Parameter Value="DarkTheme"></cal:Parameter>
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBoxItem>
                                     </ComboBox>
                                 </Grid>
                             </StackPanel>

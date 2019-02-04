@@ -19,21 +19,21 @@
         <WindowChrome CornerRadius="7" ResizeBorderThickness="7"/>
     </WindowChrome.WindowChrome>
 
-    <Border Style="{StaticResource LoginWindowMainBorderStyle}">
+    <Border Style="{DynamicResource LoginWindowMainBorderStyle}">
         <Grid>
-            <Button Style="{StaticResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15" Background="#FF6258"></Button>
-            <Button Style="{StaticResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 15 15 15" Background="#FFBF2F"></Button>
+            <Button Style="{DynamicResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15" Background="#FF6258"></Button>
+            <Button Style="{DynamicResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 15 15 15" Background="#FFBF2F"></Button>
 
             <StackPanel Margin="100 100 100 0">
-                <TextBlock Style="{StaticResource TextBlockStyle}" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">PASS KEEPER</TextBlock>
+                <TextBlock Style="{DynamicResource TextBlockStyle}" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">PASS KEEPER</TextBlock>
 
-                <Label Margin="0 30 0 0" Content="{StaticResource Login}"></Label>
-                <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Username}" HorizontalAlignment="Center" Width="250"></TextBox>
+                <Label Margin="0 30 0 0" Content="{DynamicResource Login}"></Label>
+                <TextBox Style="{DynamicResource TextBoxStyle}" Text="{Binding Username}" HorizontalAlignment="Center" Width="250"></TextBox>
 
-                <Label Margin="0 15 0 0" Content="{StaticResource Password}"></Label>
-                <PasswordBox Name="PasswordBox" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Center" Width="250"></PasswordBox>
+                <Label Margin="0 15 0 0" Content="{DynamicResource Password}"></Label>
+                <PasswordBox Name="PasswordBox" Style="{DynamicResource TextBoxStyle}" HorizontalAlignment="Center" Width="250"></PasswordBox>
 
-                <Button Style="{StaticResource FilledButton}" Width="230" Height="35" Margin="0 25 0 0" Content="{StaticResource LogIn}">
+                <Button Style="{DynamicResource FilledButton}" Width="230" Height="35" Margin="0 25 0 0" Content="{DynamicResource LogIn}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <cal:ActionMessage MethodName="LogInMethod">
@@ -44,7 +44,7 @@
                     </i:Interaction.Triggers>
                 </Button>
                 
-                <Button Style="{StaticResource NonFilledButton}" Width="190" Height="37" Margin="0 15 0 0" Content="{StaticResource SignUp}">
+                <Button Style="{DynamicResource NonFilledButton}" Width="190" Height="37" Margin="0 15 0 0" Content="{DynamicResource SignUp}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <cal:ActionMessage MethodName="SignUpMethod">
@@ -54,7 +54,7 @@
                     </i:Interaction.Triggers>
                 </Button>
 
-                <Label Margin="0 80 0 0" FontSize="12" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryColor}" Content="{Binding InformationString}"></Label>
+                <Label Margin="0 80 0 0" FontSize="12" HorizontalAlignment="Center" Foreground="{DynamicResource PrimaryColor}" Content="{Binding InformationString}"></Label>
             </StackPanel>
         </Grid>
     </Border>

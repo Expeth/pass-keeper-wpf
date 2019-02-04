@@ -7,17 +7,17 @@
 
     <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
     </Style>
     
     <Style x:Key="TextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
     </Style>
 
     <Style x:Key="RoundedButton" TargetType="Button">
@@ -36,9 +36,9 @@
     <Style x:Key="TextBoxStyle">
         <Setter Property="Control.BorderThickness" Value="01"/>
         <Setter Property="Control.FontSize" Value="15"/>
-        <Setter Property="Control.Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Control.Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="Control.Padding" Value="5"/>
-        <Setter Property="Control.Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="Control.Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -54,15 +54,15 @@
 
         <Style.Triggers>
             <Trigger Property="Control.IsFocused" Value="True">
-                <Setter Property="Control.BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Control.BorderBrush" Value="{DynamicResource PrimaryColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="FilledButton" TargetType="Button">
         <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
-        <Setter Property="Foreground" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBackgroundColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -81,10 +81,10 @@
 
     <Style x:Key="NonFilledButton" TargetType="Button">
         <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
-        <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -103,15 +103,15 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
-                <Setter Property="Foreground" Value="{StaticResource PrimaryBackgroundColor}"/>
+                <Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryBackgroundColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="LoginWindowMainBorderStyle" TargetType="Border">
         <Setter Property="CornerRadius" Value="5"/>
-        <Setter Property="Background" Value="{StaticResource LoginWindowBackgroundGradient}">
+        <Setter Property="Background" Value="{DynamicResource LoginWindowBackgroundGradient}">
         </Setter>
     </Style>
 
@@ -121,22 +121,22 @@
 
     <Style x:Key="NavigationMenuStyle" TargetType="Border">
         <Setter Property="CornerRadius" Value="7 7 0 0"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
     </Style>
 
     <Style x:Key="MainGridStyle" TargetType="Border">
         <Setter Property="CornerRadius" Value="0 0 7 7"/>
-        <Setter Property="Background" Value="{StaticResource MainWindowBackgroundColor}"/>
+        <Setter Property="Background" Value="{DynamicResource MainWindowBackgroundColor}"/>
     </Style>
 
     <Style x:Key="MenuListViewStyle" TargetType="ListView">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
     </Style>
 
     <Style x:Key="MenuItemStyle" TargetType="ListViewItem">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="0 0 0 15"/>
         <Setter Property="Template">
@@ -150,25 +150,25 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="MainListViewStyle" TargetType="ListView">
-        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
     <Style TargetType="ListViewItem">
         <Setter Property="Width" Value="188"/>
         <Setter Property="Height" Value="120"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColor}"/>
         <Setter Property="Margin" Value="0 20 20 0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -195,32 +195,32 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             
-            <TextBlock Foreground="{StaticResource ForegroundColor}" FontWeight="Heavy" HorizontalAlignment="Center" Margin="10" Text="{Binding Title}"></TextBlock>
-            <TextBlock Foreground="{StaticResource ForegroundColor}" HorizontalAlignment="Center" Text="{Binding WebsiteName}" Margin="10 45 10 0"></TextBlock>
+            <TextBlock Foreground="{DynamicResource ForegroundColor}" FontWeight="Heavy" HorizontalAlignment="Center" Margin="10" Text="{Binding Title}"></TextBlock>
+            <TextBlock Foreground="{DynamicResource ForegroundColor}" HorizontalAlignment="Center" Text="{Binding WebsiteName}" Margin="10 45 10 0"></TextBlock>
 
-            <Border Grid.Row="1" Background="{StaticResource AccentColor}" CornerRadius="7">
+            <Border Grid.Row="1" Background="{DynamicResource AccentColor}" CornerRadius="7">
                 <WrapPanel>
-                    <ToggleButton HorizontalAlignment="Left" Margin="5" Width="30" Height="30" Style="{StaticResource MaterialDesignActionToggleButton}"
+                    <ToggleButton HorizontalAlignment="Left" Margin="5" Width="30" Height="30" Style="{DynamicResource MaterialDesignActionToggleButton}"
                               ToolTip="{DynamicResource ToolTipFavorite}"
-                              Background="{StaticResource PrimaryBackgroundColor}"
+                              Background="{DynamicResource PrimaryBackgroundColor}"
                               IsChecked="{Binding IsFavorite}">
                         <ToggleButton.Content>
-                            <md:PackIcon Kind="HeartBroken" Width="20" Height="20" Foreground="{StaticResource AccentColor}"/>
+                            <md:PackIcon Kind="HeartBroken" Width="20" Height="20" Foreground="{DynamicResource AccentColor}"/>
                         </ToggleButton.Content>
                         <md:ToggleButtonAssist.OnContent>
-                            <md:PackIcon Kind="Heart" Width="20" Height="20" Foreground="{StaticResource AccentColor}"/>
+                            <md:PackIcon Kind="Heart" Width="20" Height="20" Foreground="{DynamicResource AccentColor}"/>
                         </md:ToggleButtonAssist.OnContent>
                     </ToggleButton>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    <Button Style="{DynamicResource MaterialDesignFloatingActionButton}"
                             ToolTip="{DynamicResource ToolTipDelete}"
                             Margin="5"
                             BorderThickness="0"
-                            Foreground="{StaticResource ForegroundColor}"
-                            Width="30" Height="30" Background="{StaticResource PrimaryBackgroundColor}">
+                            Foreground="{DynamicResource ForegroundColor}"
+                            Width="30" Height="30" Background="{DynamicResource PrimaryBackgroundColor}">
                         <md:PackIcon
                             Kind="Delete"
                             Height="20"
-                            Width="20" Foreground="{StaticResource AccentColor}"/>
+                            Width="20" Foreground="{DynamicResource AccentColor}"/>
                     </Button>
                 </WrapPanel>
             </Border>
@@ -305,13 +305,13 @@
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
                     <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}">
                         <Track.DecreaseRepeatButton>
-                            <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource PageScrollButton}"/>
+                            <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{DynamicResource PageScrollButton}"/>
                         </Track.DecreaseRepeatButton>
                         <Track.IncreaseRepeatButton>
-                            <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource PageScrollButton}"/>
+                            <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{DynamicResource PageScrollButton}"/>
                         </Track.IncreaseRepeatButton>
                         <Track.Thumb>
-                            <Thumb Style="{StaticResource VerticalThumbStyle}" />
+                            <Thumb Style="{DynamicResource VerticalThumbStyle}" />
                         </Track.Thumb>
                     </Track>
                 </ControlTemplate>
@@ -326,13 +326,13 @@
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
                             <Track x:Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}">
                                 <Track.DecreaseRepeatButton>
-                                    <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource PageScrollButton}"/>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{DynamicResource PageScrollButton}"/>
                                 </Track.DecreaseRepeatButton>
                                 <Track.IncreaseRepeatButton>
-                                    <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource PageScrollButton}"/>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{DynamicResource PageScrollButton}"/>
                                 </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
-                                    <Thumb Style="{StaticResource HorizontalThumbStyle}" />
+                                    <Thumb Style="{DynamicResource HorizontalThumbStyle}" />
                                 </Track.Thumb>
                             </Track>
                         </ControlTemplate>
@@ -344,15 +344,15 @@
 
     <Style TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignRadioButton}">
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="Margin" Value="0 10 0 0"/>
         <Setter Property="FontWeight" Value="Light"/>
     </Style>
 
     <Style x:Key="MenuItemButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="0 0 0 15"/>
         <Setter Property="Template">
@@ -366,7 +366,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
