@@ -25,7 +25,7 @@
             <Button Style="{StaticResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 15 15 15" Background="#FFBF2F"></Button>
 
             <StackPanel Margin="100 100 100 0">
-                <TextBlock FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">PASS KEEPER</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockStyle}" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">PASS KEEPER</TextBlock>
 
                 <Label Margin="0 30 0 0">Login:</Label>
                 <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Username}" HorizontalAlignment="Center" Width="250"></TextBox>
@@ -54,7 +54,7 @@
                     </i:Interaction.Triggers>
                 </Button>
 
-                <Label Margin="0 80 0 0" FontSize="12" HorizontalAlignment="Center" Foreground="#FE224C" Content="{Binding InformationString}"></Label>
+                <Label Margin="0 80 0 0" FontSize="12" HorizontalAlignment="Center" Foreground="{StaticResource PrimaryColor}" Content="{Binding InformationString}"></Label>
             </StackPanel>
         </Grid>
     </Border>

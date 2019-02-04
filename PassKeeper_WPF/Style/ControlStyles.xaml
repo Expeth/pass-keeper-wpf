@@ -1,7 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:PassKeeper_WPF.Style">
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:local="clr-namespace:PassKeeper_WPF">
+
+    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+    </Style>
     
+    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+    </Style>
+
     <Style x:Key="RoundedButton" TargetType="Button">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
@@ -18,7 +34,9 @@
     <Style x:Key="TextBoxStyle">
         <Setter Property="Control.BorderThickness" Value="01"/>
         <Setter Property="Control.FontSize" Value="15"/>
+        <Setter Property="Control.Foreground" Value="{StaticResource ForegroundColor}"/>
         <Setter Property="Control.Padding" Value="5"/>
+        <Setter Property="Control.Background" Value="{StaticResource PrimaryBackgroundColor}"/>
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -34,15 +52,15 @@
 
         <Style.Triggers>
             <Trigger Property="Control.IsFocused" Value="True">
-                <Setter Property="Control.BorderBrush" Value="#FE224C"/>
+                <Setter Property="Control.BorderBrush" Value="{StaticResource PrimaryColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="FilledButton" TargetType="Button">
         <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="Background" Value="#FE224C"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBackgroundColor}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -61,10 +79,10 @@
 
     <Style x:Key="NonFilledButton" TargetType="Button">
         <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Foreground" Value="#FE224C"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#FE224C"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -83,10 +101,323 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FE224C"/>
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Foreground" Value="{StaticResource PrimaryBackgroundColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="LoginWindowMainBorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Background" Value="{StaticResource LoginWindowBackgroundGradient}">
+        </Setter>
+    </Style>
+
+    <Style x:Key="MainBorderStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="7"/>
+    </Style>
+
+    <Style x:Key="NavigationMenuStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="7 7 0 0"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="MainGridStyle" TargetType="Border">
+        <Setter Property="CornerRadius" Value="0 0 7 7"/>
+        <Setter Property="Background" Value="{StaticResource MainWindowBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="MenuListViewStyle" TargetType="ListView">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="MenuItemStyle" TargetType="ListViewItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0 0 0 15"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border Name="Border" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="MainListViewStyle" TargetType="ListView">
+        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style TargetType="ListViewItem">
+        <Setter Property="Width" Value="188"/>
+        <Setter Property="Height" Value="120"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryBackgroundColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+        <Setter Property="Margin" Value="0 20 20 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="7">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}">
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="CardListViewItemDataTemplate" DataType="{x:Type local:IRecord}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Foreground="{StaticResource ForegroundColor}" FontWeight="Heavy" HorizontalAlignment="Center" Margin="10" Text="{Binding Title}"></TextBlock>
+            <TextBlock Foreground="{StaticResource ForegroundColor}" HorizontalAlignment="Center" Text="{Binding WebsiteName}" Margin="10 45 10 0"></TextBlock>
+
+            <Border Grid.Row="1" Background="{StaticResource AccentColor}" CornerRadius="7">
+                <WrapPanel>
+                    <ToggleButton HorizontalAlignment="Left" Margin="5" Width="30" Height="30" Style="{StaticResource MaterialDesignActionToggleButton}"
+                              ToolTip="Add to Favorites"
+                              Background="{StaticResource PrimaryBackgroundColor}"
+                              IsChecked="{Binding IsFavorite}">
+                        <ToggleButton.Content>
+                            <md:PackIcon Kind="HeartBroken" Width="20" Height="20" Foreground="{StaticResource AccentColor}"/>
+                        </ToggleButton.Content>
+                        <md:ToggleButtonAssist.OnContent>
+                            <md:PackIcon Kind="Heart" Width="20" Height="20" Foreground="{StaticResource AccentColor}"/>
+                        </md:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+                    <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            ToolTip="Delete"
+                            Margin="5"
+                            BorderThickness="0"
+                            Foreground="{StaticResource ForegroundColor}"
+                            Width="30" Height="30" Background="{StaticResource PrimaryBackgroundColor}">
+                        <md:PackIcon
+                            Kind="Delete"
+                            Height="20"
+                            Width="20" Foreground="{StaticResource AccentColor}"/>
+                    </Button>
+                </WrapPanel>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type ScrollBar}">
+        <Style.Resources>
+            <Style x:Key="PageScrollButton" TargetType="{x:Type RepeatButton}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type RepeatButton}">
+                            <Rectangle Fill="Transparent"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="VerticalThumbStyle" TargetType="{x:Type Thumb}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+                            <Border Background="Transparent">
+                                <Rectangle x:Name="Slider" RadiusX="2" RadiusY="2" Fill="#9E9E9E" Width="4" HorizontalAlignment="Right" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="12" DecelerationRatio="1" Storyboard.TargetName="Slider" Storyboard.TargetProperty="Width" Duration="0:0:0.10" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="12" DecelerationRatio="1" Storyboard.TargetName="Slider" Storyboard.TargetProperty="Width" Duration="0:0:0.10" />
+                                                <DoubleAnimation To="4" AccelerationRatio="1" Storyboard.TargetName="Slider" Storyboard.TargetProperty="Width" BeginTime="0:0:0.15" Duration="0:0:0.25" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="HorizontalThumbStyle" TargetType="{x:Type Thumb}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+                            <Border Background="Transparent">
+                                <Rectangle x:Name="Slider" Fill="#9E9E9E" Height="4" VerticalAlignment="Bottom" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="12" DecelerationRatio="1" Storyboard.TargetName="Slider" Storyboard.TargetProperty="Height" Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation To="4" DecelerationRatio="1" Storyboard.TargetName="Slider" Storyboard.TargetProperty="Height" Duration="0:0:0.25" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}">
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource PageScrollButton}"/>
+                        </Track.DecreaseRepeatButton>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource PageScrollButton}"/>
+                        </Track.IncreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb Style="{StaticResource VerticalThumbStyle}" />
+                        </Track.Thumb>
+                    </Track>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="Height" Value="12"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Track x:Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource PageScrollButton}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource PageScrollButton}"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource HorizontalThumbStyle}" />
+                                </Track.Thumb>
+                            </Track>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignRadioButton}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
+        <Setter Property="FontWeight" Value="Light"/>
+    </Style>
+
+    <Style x:Key="MenuItemButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0 0 0 15"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="Border" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Storyboard x:Key="OpenAddRecordDialog">
+        <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="Width"
+                Storyboard.TargetName="AddRecordDialog">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="230"/>
+        </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
+                                                    Storyboard.TargetName="AddRecordDialog">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <Storyboard x:Key="CloseAddRecordDialog">
+        <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="Width"
+                Storyboard.TargetName="AddRecordDialog">
+            <EasingDoubleKeyFrame KeyTime="0" Value="230"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
+                                                    Storyboard.TargetName="AddRecordDialog">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Hidden}"/>
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <Storyboard x:Key="OpenEditRecordDialog">
+        <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="Width"
+                Storyboard.TargetName="EditRecordDialog">
+            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="230"/>
+        </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
+                                                    Storyboard.TargetName="EditRecordDialog">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <Storyboard x:Key="CloseEditRecordDialog">
+        <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="Width"
+                Storyboard.TargetName="EditRecordDialog">
+            <EasingDoubleKeyFrame KeyTime="0" Value="230"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
+                                                    Storyboard.TargetName="EditRecordDialog">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Hidden}"/>
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
 </ResourceDictionary>

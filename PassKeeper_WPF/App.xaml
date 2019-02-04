@@ -8,6 +8,7 @@
                 <ResourceDictionary>
                     <local:MyBootstrapper x:Key="bootstrapper"></local:MyBootstrapper>
                 </ResourceDictionary>
+                
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 
