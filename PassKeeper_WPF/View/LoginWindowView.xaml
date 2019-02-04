@@ -27,13 +27,13 @@
             <StackPanel Margin="100 100 100 0">
                 <TextBlock Style="{StaticResource TextBlockStyle}" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">PASS KEEPER</TextBlock>
 
-                <Label Margin="0 30 0 0">Login:</Label>
+                <Label Margin="0 30 0 0" Content="{StaticResource Login}"></Label>
                 <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Username}" HorizontalAlignment="Center" Width="250"></TextBox>
 
-                <Label Margin="0 15 0 0">Password:</Label>
+                <Label Margin="0 15 0 0" Content="{StaticResource Password}"></Label>
                 <PasswordBox Name="PasswordBox" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Center" Width="250"></PasswordBox>
 
-                <Button Style="{StaticResource FilledButton}" Width="230" Height="35" Margin="0 25 0 0" Content="LOG IN">
+                <Button Style="{StaticResource FilledButton}" Width="230" Height="35" Margin="0 25 0 0" Content="{StaticResource LogIn}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <cal:ActionMessage MethodName="LogInMethod">
@@ -44,7 +44,7 @@
                     </i:Interaction.Triggers>
                 </Button>
                 
-                <Button Style="{StaticResource NonFilledButton}" Width="190" Height="37" Margin="0 15 0 0" Content="SIGN UP">
+                <Button Style="{StaticResource NonFilledButton}" Width="190" Height="37" Margin="0 15 0 0" Content="{StaticResource SignUp}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <cal:ActionMessage MethodName="SignUpMethod">

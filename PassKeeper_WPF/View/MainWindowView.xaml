@@ -20,30 +20,30 @@
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="OpenAddRecordDialogButton">
-            <BeginStoryboard Storyboard="{StaticResource OpenAddRecordDialog}"/>
+            <BeginStoryboard Storyboard="{DynamicResource OpenAddRecordDialog}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseAddRecordDialogButton">
-            <BeginStoryboard Storyboard="{StaticResource CloseAddRecordDialog}"/>
+            <BeginStoryboard Storyboard="{DynamicResource CloseAddRecordDialog}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="AddRecordButton">
-            <BeginStoryboard Storyboard="{StaticResource CloseAddRecordDialog}"/>
+            <BeginStoryboard Storyboard="{DynamicResource CloseAddRecordDialog}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseEditRecordDialogButton">
-            <BeginStoryboard Storyboard="{StaticResource CloseEditRecordDialog}"/>
+            <BeginStoryboard Storyboard="{DynamicResource CloseEditRecordDialog}"/>
         </EventTrigger>
         <EventTrigger RoutedEvent="ListView.SelectionChanged" SourceName="Records">
-            <BeginStoryboard Storyboard="{StaticResource OpenEditRecordDialog}"/>
+            <BeginStoryboard Storyboard="{DynamicResource OpenEditRecordDialog}"/>
         </EventTrigger>
     </Window.Triggers>
 
-    <Border Style="{StaticResource MainBorderStyle}">
+    <Border Style="{DynamicResource MainBorderStyle}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Style="{StaticResource NavigationMenuStyle}">
+            <Border Grid.Row="0" Style="{DynamicResource NavigationMenuStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="353*"/>
@@ -52,17 +52,17 @@
                     </Grid.ColumnDefinitions>
 
                     <WrapPanel Grid.Row="0" Margin="15 15 0 0">
-                        <Button Style="{StaticResource RoundedButton}" Background="#FF6258" Width="10" Height="10">
+                        <Button Style="{DynamicResource RoundedButton}" Background="#FF6258" Width="10" Height="10">
                             <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Button.Click">
-                                    <cal:ActionMessage MethodName="CloseWindow">
+                                <i:EventTrigger EventName="Click">
+                                    <cal:ActionMessage MethodName="CloseWindow111">
                                         <cal:Parameter Value="{Binding ElementName=MainWindow}"/>
                                     </cal:ActionMessage>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
-                        <Button Style="{StaticResource RoundedButton}" Background="#FFBF2F" Width="10" Height="10" Margin="5 0 0 0"/>
-                        <Button Style="{StaticResource RoundedButton}" Background="#2ACB42" Width="10" Height="10" Margin="5 0 0 0"/>
+                        <Button Style="{DynamicResource RoundedButton}" Background="#FFBF2F" Width="10" Height="10" Margin="5 0 0 0"/>
+                        <Button Style="{DynamicResource RoundedButton}" Background="#2ACB42" Width="10" Height="10" Margin="5 0 0 0"/>
                     </WrapPanel>
 
                     <Grid Grid.Column="0" Margin="120 0 0 0">
@@ -71,16 +71,16 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <md:PackIcon Kind="Magnify" Opacity=".56" Margin="0 22 0 0" Foreground="{StaticResource ForegroundColor}"/>
+                        <md:PackIcon Kind="Magnify" Opacity=".56" Margin="0 22 0 0" Foreground="{DynamicResource ForegroundColor}"/>
                         <TextBox Name="SearchTextBox"
                                  Grid.Column="1"
                                  Margin="8 0 0 0"
                                  BorderThickness="0"
-                                 md:HintAssist.Hint="Search in PassKeeper..."
+                                 md:HintAssist.Hint="{DynamicResource SearchTextBox}"
                                  md:TextFieldAssist.DecorationVisibility="Hidden"
                                  MinWidth="200"
                                  VerticalAlignment="Center"
-                                 Foreground="{StaticResource ForegroundColor}">
+                                 Foreground="{DynamicResource ForegroundColor}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
                                     <i:InvokeCommandAction Command="{Binding SearchCommand}"
@@ -91,11 +91,11 @@
                     </Grid>
 
                     <Grid Grid.Column="2">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="10" HorizontalAlignment="Right" Margin="0 15 70 0" Text="{Binding User.Name}"/>
-                        <TextBlock Style="{StaticResource TextBlockStyle}" FontSize="10" HorizontalAlignment="Right" Margin="0 30 70 0" Text="{Binding User.Name}"/>
+                        <TextBlock Style="{DynamicResource TextBlockStyle}" FontSize="10" HorizontalAlignment="Right" Margin="0 15 70 0" Text="{Binding User.Name}"/>
+                        <TextBlock Style="{DynamicResource TextBlockStyle}" FontSize="10" HorizontalAlignment="Right" Margin="0 30 70 0" Text="{Binding User.Name}"/>
                         <md:PopupBox Padding="25" HorizontalAlignment="Right" Margin="0 0 10 0">
                             <StackPanel>
-                                <TextBlock HorizontalAlignment="Center" Margin="0 0 0 20" FontSize="20" Text="Settings"></TextBlock>
+                                <TextBlock HorizontalAlignment="Center" Margin="0 0 0 20" FontSize="20" Text="{DynamicResource Settings}"></TextBlock>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -106,18 +106,50 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" Margin="5 10 5 5" Text="Language"></TextBlock>
-                                    <ComboBox Foreground="{StaticResource ForegroundColor}" Grid.Column="1" Margin="15 5 5 5" SelectedIndex="0" FontSize="12">
-                                        <ComboBoxItem Content="English"/>
-                                        <ComboBoxItem Content="Русский"/>
-                                        <ComboBoxItem Content="Українська"/>
-                                        <ComboBoxItem Content="Francaise"/>
+                                    <TextBlock Grid.Column="0" Margin="5 10 5 5" Text="{DynamicResource Language}"></TextBlock>
+                                    <ComboBox Foreground="{DynamicResource ForegroundColor}" Grid.Column="1" Margin="15 5 5 5" SelectedIndex="0" FontSize="12">
+                                        <ComboBoxItem Content="English">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Selected">
+                                                    <cal:ActionMessage MethodName="ChangeLanguage">
+                                                        <cal:Parameter Value="English"></cal:Parameter>
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem Content="Русский">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Selected">
+                                                    <cal:ActionMessage MethodName="ChangeLanguage">
+                                                        <cal:Parameter Value="Russian"></cal:Parameter>
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem Content="Українська">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Selected">
+                                                    <cal:ActionMessage MethodName="ChangeLanguage">
+                                                        <cal:Parameter Value="Ukranian"></cal:Parameter>
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem Content="Francaise">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Selected">
+                                                    <cal:ActionMessage MethodName="ChangeLanguage">
+                                                        <cal:Parameter Value="French"></cal:Parameter>
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBoxItem>
                                     </ComboBox>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="5 10 5 5" Text="Theme"></TextBlock>
-                                    <ComboBox Foreground="{StaticResource ForegroundColor}" Grid.Column="1" Grid.Row="1" Margin="15 5 5 5" SelectedIndex="0" FontSize="12">
-                                        <ComboBoxItem Content="Dark"/>
-                                        <ComboBoxItem Content="Light"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Margin="5 10 5 5" Text="{DynamicResource Theme}"></TextBlock>
+                                    <ComboBox Foreground="{DynamicResource ForegroundColor}" Grid.Column="1" Grid.Row="1" Margin="15 5 5 5" SelectedIndex="0" FontSize="12">
+                                        <ComboBoxItem Content="{DynamicResource LightTheme}"/>
+                                        <ComboBoxItem Content="{DynamicResource DarkTheme}"/>
                                     </ComboBox>
                                 </Grid>
                             </StackPanel>
@@ -126,7 +158,7 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource MainGridStyle}">
+            <Border Grid.Row="1" Grid.RowSpan="2" Style="{DynamicResource MainGridStyle}">
                 <Grid Margin="40">
                     <Grid.RowDefinitions>
                         <RowDefinition Name="Row"/>
@@ -136,25 +168,25 @@
                         <ColumnDefinition Width="709*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Padding="20 20 20 0" CornerRadius="5" Grid.Column="0" Background="{StaticResource PrimaryBackgroundColor}">
+                    <Border Padding="20 20 20 0" CornerRadius="5" Grid.Column="0" Background="{DynamicResource PrimaryBackgroundColor}">
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="ORDER BY" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                <RadioButton Margin="0 10 0 0" Content="Title">
+                                <TextBlock Text="{DynamicResource OrderBy}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                <RadioButton Margin="0 10 0 0" Content="{DynamicResource Title}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Checked">
                                             <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="Title"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </RadioButton>
-                                <RadioButton Content="Website Name">
+                                <RadioButton Content="{DynamicResource WebsiteName}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Checked">
                                             <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="WebsiteName"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </RadioButton>
-                                <RadioButton Content="Creation Date">
+                                <RadioButton Content="{DynamicResource CreationDate}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Checked">
                                             <i:InvokeCommandAction Command="{Binding SortCommand}" CommandParameter="Date"/>
@@ -162,10 +194,10 @@
                                     </i:Interaction.Triggers>
                                 </RadioButton>
 
-                                <TextBlock Margin="0 65 0 0" Text="CATEGORIES" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                <ListView Cursor="Hand" Margin="0 15 0 0" Style="{StaticResource MenuListViewStyle}">
-                                    <ListViewItem IsSelected="True" Style="{StaticResource MenuItemStyle}"
-                                                  Content="All Records">
+                                <TextBlock Margin="0 65 0 0" Text="{DynamicResource Categories}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                <ListView Cursor="Hand" Margin="0 15 0 0" Style="{DynamicResource MenuListViewStyle}">
+                                    <ListViewItem IsSelected="True" Style="{DynamicResource MenuItemStyle}"
+                                                  Content="{DynamicResource AllRecords}">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Selected">
                                                 <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
@@ -173,8 +205,8 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListViewItem>
-                                    <ListViewItem Style="{StaticResource MenuItemStyle}"
-                                                  Content="Favorites">
+                                    <ListViewItem Style="{DynamicResource MenuItemStyle}"
+                                                  Content="{DynamicResource Favorites}">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Selected">
                                                 <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
@@ -182,8 +214,8 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListViewItem>
-                                    <ListViewItem Style="{StaticResource MenuItemStyle}"
-                                                  Content="Website Accounts">
+                                    <ListViewItem Style="{DynamicResource MenuItemStyle}"
+                                                  Content="{DynamicResource WebsiteAccounts}">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Selected">
                                                 <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
@@ -191,8 +223,8 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListViewItem>
-                                    <ListViewItem Style="{StaticResource MenuItemStyle}"
-                                                  Content="Email Accounts">
+                                    <ListViewItem Style="{DynamicResource MenuItemStyle}"
+                                                  Content="{DynamicResource EmailAccounts}">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Selected">
                                                 <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
@@ -200,8 +232,8 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ListViewItem>
-                                    <ListViewItem Style="{StaticResource MenuItemStyle}"
-                                                  Content="Credit Cards">
+                                    <ListViewItem Style="{DynamicResource MenuItemStyle}"
+                                                  Content="{DynamicResource CreditCards}">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Selected">
                                                 <i:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"
@@ -213,90 +245,90 @@
                             </StackPanel>
                             <Button Name="OpenAddRecordDialogButton"
                                     Margin="0 10 0 15" VerticalAlignment="Bottom"
-                                    Background="{StaticResource PrimaryColor}" 
+                                    Background="{DynamicResource PrimaryColor}" 
                                     Cursor="Hand"
-                                    Content="Add Record">
+                                    Content="{DynamicResource AddRecord}">
                             </Button>
                         </Grid>
                     </Border>
 
                     <DockPanel Grid.Column="1">
-                        <Border Padding="20 20 20 0" Width="0" Name="AddRecordDialog" CornerRadius="5" DockPanel.Dock="Right" Visibility="Hidden" Background="{StaticResource PrimaryBackgroundColor}">
+                        <Border Padding="20 20 20 0" Width="0" Name="AddRecordDialog" CornerRadius="5" DockPanel.Dock="Right" Visibility="Hidden" Background="{DynamicResource PrimaryBackgroundColor}">
                             <StackPanel>
-                                <TextBlock Text="Title" Style="{StaticResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                <TextBlock Text="{DynamicResource Title}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding Title}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="Username" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource UsernameRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding Username}"></TextBox>
                                 <WrapPanel>
-                                    <TextBlock Margin="0 15 0 0" FontSize="12" Text="Password" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                    <Button FontSize="10" Margin="15 15 0 0" HorizontalAlignment="Right" Style="{StaticResource MenuItemButton}" Content="(Generate)"
+                                    <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource PasswordRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                    <Button FontSize="10" Margin="15 15 0 0" HorizontalAlignment="Right" Style="{DynamicResource MenuItemButton}" Content="(Generate)"
                                             Command="{Binding GeneratePasswordCommand}"/>
                                 </WrapPanel>
-                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding Password}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="Website URL" Style="{StaticResource TextBlockStyle}"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource WebsiteRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding WebsiteName}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="Category" Style="{StaticResource TextBlockStyle}"></TextBlock>
+                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource CategoryRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
                                 <ComboBox Margin="10" SelectedItem="{Binding Category}">
-                                    <ComboBoxItem Content="Website Accounts"/>
-                                    <ComboBoxItem Content="Email Accounts"/>
-                                    <ComboBoxItem Content="Credit Cards"/>
+                                    <ComboBoxItem Content="{DynamicResource WebsiteAccounts}"/>
+                                    <ComboBoxItem Content="{DynamicResource EmailAccounts}"/>
+                                    <ComboBoxItem Content="{DynamicResource CreditCards}"/>
                                 </ComboBox>
                                 <Button Margin="0 15 0 0" 
                                         Name="AddRecordButton"
-                                        Content="Add Record"
+                                        Content="{DynamicResource AddRecord}"
                                         Command="{Binding AddRecordCommand}">
                                 </Button>
                                 <Button Margin="0 15 0 0" 
                                         Name="CloseAddRecordDialogButton"
-                                        Content="Cancel">
+                                        Content="{DynamicResource Cancel}">
 
                                 </Button>
                             </StackPanel>
                         </Border>
 
-                        <Border Padding="20 20 20 0" Width="0" Name="EditRecordDialog" CornerRadius="5" DockPanel.Dock="Right" Visibility="Hidden" Background="{StaticResource PrimaryBackgroundColor}">
+                        <Border Padding="20 20 20 0" Width="0" Name="EditRecordDialog" CornerRadius="5" DockPanel.Dock="Right" Visibility="Hidden" Background="{DynamicResource PrimaryBackgroundColor}">
                             <StackPanel>
-                                <TextBlock Text="Title" Style="{StaticResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                <TextBlock Text="{DynamicResource Title}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.Title}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" Text="Username" Style="{StaticResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                <TextBlock Margin="0 15 0 0" Text="{DynamicResource UsernameRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.Username}"></TextBox>
                                 <WrapPanel>
-                                    <TextBlock Margin="0 15 0 0" Text="Password" Style="{StaticResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                    <Button FontSize="10" Margin="15 15 0 0" HorizontalAlignment="Right" Style="{StaticResource MenuItemButton}" Content="(Generate)"/>
+                                    <TextBlock Margin="0 15 0 0" Text="{DynamicResource PasswordRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                    <Button FontSize="10" Margin="15 15 0 0" HorizontalAlignment="Right" Style="{DynamicResource MenuItemButton}" Content="(Generate)"/>
                                 </WrapPanel>
-                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.Password}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" Text="Website URL" Style="{StaticResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{StaticResource TextBoxStyle}"
+                                <TextBlock Margin="0 15 0 0" Text="{DynamicResource WebsiteName}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.WebsiteName}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" Text="Category" Style="{StaticResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBlock Margin="0 15 0 0" Text="Category" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <ComboBox Margin="10" SelectedValue="{Binding Category}">
-                                    <ComboBoxItem Content="Website Account"/>
-                                    <ComboBoxItem Content="Email Account"/>
-                                    <ComboBoxItem Content="Credit Card"/>
+                                    <ComboBoxItem Content="{DynamicResource WebsiteAccounts}"/>
+                                    <ComboBoxItem Content="{DynamicResource EmailAccounts}"/>
+                                    <ComboBoxItem Content="{DynamicResource CreditCards}"/>
                                 </ComboBox>
-                                <Button Margin="0 15 0 0" Name="CloseEditRecordDialogButton">Cancel</Button>
+                                <Button Margin="0 15 0 0" Name="CloseEditRecordDialogButton"  Content="{DynamicResource Cancel}"></Button>
                             </StackPanel>
                         </Border>
 
-                        <Border Margin="25 0 25 0" DockPanel.Dock="Left" Name="MainGrid" Padding="20 20 20 0" CornerRadius="5" Background="{StaticResource PrimaryBackgroundColor}">
+                        <Border Margin="25 0 25 0" DockPanel.Dock="Left" Name="MainGrid" Padding="20 20 20 0" CornerRadius="5" Background="{DynamicResource PrimaryBackgroundColor}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="32"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" Text="{Binding SelectedCategory}" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Grid.Row="0" Text="{Binding SelectedCategory}" Style="{DynamicResource TextBlockStyle}"/>
 
                                 <ListView Padding="0 0 0 15" Grid.Row="1" x:Name="Records" 
-                                          Style="{StaticResource MainListViewStyle}"
-                                          ItemTemplate="{StaticResource CardListViewItemDataTemplate}"
+                                          Style="{DynamicResource MainListViewStyle}"
+                                          ItemTemplate="{DynamicResource CardListViewItemDataTemplate}"
                                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                           ItemsSource="{Binding UserRecords}"
                                           SelectedValue="{Binding SelectedRecord}">

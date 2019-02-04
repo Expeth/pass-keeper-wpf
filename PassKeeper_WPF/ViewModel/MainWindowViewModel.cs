@@ -142,6 +142,11 @@ namespace PassKeeper_WPF
             wnd.CloseWindow();
         }
 
+        public void ChangeLanguage(string language)
+        {
+            Application.Current.Resources.MergedDictionaries[6].Source = new Uri(@"Languages\{language}.xaml", UriKind.RelativeOrAbsolute);
+        }
+
         private void CleanProperties(object obj)
         {
             Title = Note = Password = Username = WebsiteName = "";
@@ -157,7 +162,7 @@ namespace PassKeeper_WPF
 
             string searchString = obj as string;
             UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Title.Contains(searchString) /*&& x.Category == SelectedCategory*/));
-        } 
+        }
 
         private void DeleteRecordMethod(object obj)
         {

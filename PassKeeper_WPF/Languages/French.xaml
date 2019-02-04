@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:PassKeeper_WPF.Languages"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="Login">Login:</sys:String>
+    <sys:String x:Key="Password">Mot de passe:</sys:String>
+    <sys:String x:Key="LogIn">SE CONNECTER</sys:String>
+    <sys:String x:Key="SignUp">S'INSCRIRE</sys:String>
+    <sys:String x:Key="SearchTextBox">Cherher au PassKeeper...</sys:String>
+    <sys:String x:Key="ToolTipDelete">Enlever</sys:String>
+    <sys:String x:Key="ToolTipFavorite">Ajouter aux favoris</sys:String>
+    <sys:String x:Key="Settings">Paramètres</sys:String>
+    <sys:String x:Key="Language">Langue</sys:String>
+    <sys:String x:Key="Theme">Le thème</sys:String>
+    <sys:String x:Key="LightTheme">Thème de lumière</sys:String>
+    <sys:String x:Key="DarkTheme">Thème sombre</sys:String>
+    <sys:String x:Key="OrderBy">TIER PAR</sys:String>
+    <sys:String x:Key="Title">Le nom</sys:String>
+    <sys:String x:Key="WebsiteName">Le nom du site</sys:String>
+    <sys:String x:Key="CreationDate">Date de création</sys:String>
+    <sys:String x:Key="Categories">CATÉGORIES</sys:String>
+    <sys:String x:Key="AllRecords">Tous les enregistrements</sys:String>
+    <sys:String x:Key="Favorites">Favoris</sys:String>
+    <sys:String x:Key="WebsiteAccounts">Сomptes de site web</sys:String>
+    <sys:String x:Key="EmailAccounts">Bureau de poste</sys:String>
+    <sys:String x:Key="CreditCards">Сarte de crédit</sys:String>
+    <sys:String x:Key="AddRecord">Ajouter</sys:String>
+    <sys:String x:Key="UsernameRecord">Nom d'utilisateur</sys:String>
+    <sys:String x:Key="PasswordRecord">Mot de passe</sys:String>
+    <sys:String x:Key="WebsiteRecord">Lien vers le site</sys:String>
+    <sys:String x:Key="CategoryRecord">Catégorie</sys:String>
+    <sys:String x:Key="Cancel">Annuler</sys:String>
+</ResourceDictionary>

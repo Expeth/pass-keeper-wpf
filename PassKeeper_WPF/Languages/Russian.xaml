@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:PassKeeper_WPF.Languages"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="Login">Логин:</sys:String>
+    <sys:String x:Key="Password">Пароль:</sys:String>
+    <sys:String x:Key="LogIn">ВОЙТИ</sys:String>
+    <sys:String x:Key="SignUp">ЗАРЕГИСТРИРОВАТЬСЯ</sys:String>
+    <sys:String x:Key="SearchTextBox">Искать в PassKeeper...</sys:String>
+    <sys:String x:Key="ToolTipDelete">Удалить</sys:String>
+    <sys:String x:Key="ToolTipFavorite">Добавить в избранное</sys:String>
+    <sys:String x:Key="Settings">Настройки</sys:String>
+    <sys:String x:Key="Language">Язык</sys:String>
+    <sys:String x:Key="Theme">Тема</sys:String>
+    <sys:String x:Key="LightTheme">Светлая тема</sys:String>
+    <sys:String x:Key="DarkTheme">Темная тема</sys:String>
+    <sys:String x:Key="OrderBy">СОРТИРОВАТЬ ПО</sys:String>
+    <sys:String x:Key="Title">Название</sys:String>
+    <sys:String x:Key="WebsiteName">Имя Веб-Сайта</sys:String>
+    <sys:String x:Key="CreationDate">Дата Создания</sys:String>
+    <sys:String x:Key="Categories">КАТЕГОРИИ</sys:String>
+    <sys:String x:Key="AllRecords">Все записи</sys:String>
+    <sys:String x:Key="Favorites">Избранные</sys:String>
+    <sys:String x:Key="WebsiteAccounts">Веб-Сайт аккаунты</sys:String>
+    <sys:String x:Key="EmailAccounts">Почта</sys:String>
+    <sys:String x:Key="CreditCards">Кредитные карты</sys:String>
+    <sys:String x:Key="AddRecord">Добавить</sys:String>
+    <sys:String x:Key="UsernameRecord">Имя пользователя</sys:String>
+    <sys:String x:Key="PasswordRecord">Пароль</sys:String>
+    <sys:String x:Key="WebsiteRecord">Ссылка на сайт</sys:String>
+    <sys:String x:Key="CategoryRecord">Категория</sys:String>
+    <sys:String x:Key="Cancel">Отмена</sys:String>
+</ResourceDictionary>
