@@ -173,6 +173,7 @@ namespace PassKeeper_WPF
 
         private void DeleteRecordMethod(object obj)
         {
+            UserRecords.Remove(SelectedRecord);
             User.Records.Remove(SelectedRecord);
         }
 

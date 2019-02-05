@@ -216,6 +216,8 @@
                             Margin="5"
                             BorderThickness="0"
                             Foreground="{DynamicResource ForegroundColor}"
+                            Command="{Binding Path=DataContext.DeleteRecordCommand,
+                                        RelativeSource={RelativeSource AncestorType={x:Type local:MainWindowView}}}"
                             Width="30" Height="30" Background="{DynamicResource PrimaryBackgroundColor}">
                         <md:PackIcon
                             Kind="Delete"
@@ -376,7 +378,7 @@
                 Storyboard.TargetProperty="Width"
                 Storyboard.TargetName="AddRecordDialog">
             <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="230"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="230"/>
         </DoubleAnimationUsingKeyFrames>
         <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
                                                     Storyboard.TargetName="AddRecordDialog">
@@ -389,11 +391,11 @@
                 Storyboard.TargetProperty="Width"
                 Storyboard.TargetName="AddRecordDialog">
             <EasingDoubleKeyFrame KeyTime="0" Value="230"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
         </DoubleAnimationUsingKeyFrames>
         <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
                                                     Storyboard.TargetName="AddRecordDialog">
-            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Hidden}"/>
+            <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Hidden}"/>
         </ObjectAnimationUsingKeyFrames>
     </Storyboard>
 
@@ -402,7 +404,7 @@
                 Storyboard.TargetProperty="Width"
                 Storyboard.TargetName="EditRecordDialog">
             <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="230"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="230"/>
         </DoubleAnimationUsingKeyFrames>
         <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
                                                     Storyboard.TargetName="EditRecordDialog">
@@ -415,11 +417,11 @@
                 Storyboard.TargetProperty="Width"
                 Storyboard.TargetName="EditRecordDialog">
             <EasingDoubleKeyFrame KeyTime="0" Value="230"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
         </DoubleAnimationUsingKeyFrames>
         <ObjectAnimationUsingKeyFrames  Storyboard.TargetProperty="Visibility"
                                                     Storyboard.TargetName="EditRecordDialog">
-            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Hidden}"/>
+            <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Hidden}"/>
         </ObjectAnimationUsingKeyFrames>
     </Storyboard>
 </ResourceDictionary>

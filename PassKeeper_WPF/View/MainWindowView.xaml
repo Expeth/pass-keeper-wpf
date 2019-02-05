@@ -211,7 +211,7 @@
                                 </RadioButton>
 
                                 <TextBlock Margin="0 65 0 0" Text="{DynamicResource Categories}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
-                                <ListView Cursor="Hand" Margin="0 15 0 0" Style="{DynamicResource MenuListViewStyle}">
+                                <ListView Name="CategoriesList" Cursor="Hand" Margin="0 15 0 0" Style="{DynamicResource MenuListViewStyle}">
                                     <ListViewItem IsSelected="True" Style="{DynamicResource MenuItemStyle}"
                                                   Content="{DynamicResource AllRecords}">
                                         <i:Interaction.Triggers>
@@ -340,7 +340,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" Text="{Binding SelectedCategory}" Style="{DynamicResource TextBlockStyle}"/>
+                                <TextBlock Grid.Row="0" Text="{Binding ElementName=CategoriesList, Path=SelectedItem.Content}" Style="{DynamicResource TextBlockStyle}"/>
 
                                 <ListView Padding="0 0 0 15" Grid.Row="1" x:Name="Records" 
                                           Style="{DynamicResource MainListViewStyle}"

@@ -102,7 +102,7 @@ namespace PassKeeper_WPF
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
