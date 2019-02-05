@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PassKeeper_WPF
 {
+    [Serializable]
     public class Account : IRecord, INotifyPropertyChanged
     {
         private string title;
@@ -15,14 +16,17 @@ namespace PassKeeper_WPF
         private string websiteName;
         private string username;
         private string password;
+        private string category;
+        private bool isFavorite;
 
-        public Account(string title, string note, string websiteName, string username, string password)
+        public Account(string title, string note, string websiteName, string username, string password, string category)
         {
-            Title = title;
-            Note = note;
-            WebsiteName = websiteName;
-            Username = username;
-            Password = password;
+            Title = title == null ? "" : title;
+            Note = note == null ? "" : note;
+            WebsiteName = websiteName == null ? "" : websiteName;
+            Username = username == null ? "" : username;
+            Password = password == null ? "" : password;
+            Category = category == null ? "" : category;
             CreationDate = DateTime.Now;
         }
 
@@ -72,6 +76,24 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        public string Category
+        {
+            get => category;
+            set
+            {
+                category = value;
+                Notify();
+            }
+        }
+        public bool IsFavorite
+        {
+            get => isFavorite;
+            set
+            {
+                isFavorite = value;
+                Notify();
+            }
+        }
         #endregion
 
         public DateTime CreationDate { get; set; }
@@ -80,7 +102,7 @@ namespace PassKeeper_WPF
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

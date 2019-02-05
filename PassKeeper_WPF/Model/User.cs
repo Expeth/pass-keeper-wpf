@@ -9,13 +9,24 @@ using System.Threading.Tasks;
 
 namespace PassKeeper_WPF
 {
+    [Serializable]
     public class User : INotifyPropertyChanged
     {
         private string name;
         private string username;
         private string password;
 
-        public IList<IRecord> Records { get; set; }
+        private ObservableCollection<IRecord> records;
+
+        public ObservableCollection<IRecord> Records
+        {
+            get => records;
+            set
+            {
+                records = value;
+                Notify();
+            }
+        }
 
         public string Name
         {

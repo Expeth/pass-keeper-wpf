@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using CodeBits;
 
 namespace PassKeeper_WPF
 {
@@ -18,9 +22,13 @@ namespace PassKeeper_WPF
         private string password;
         private string note;
         private string websiteName;
+        private string category;
+        private string selectedCategory;
+        private ObservableCollection<IRecord> userRecords;
+        private IRepository<User> usersRepository;
         #endregion
 
-        #region public properties
+        #region public properties with Notify()
         public string Username
         {
             get => username;
@@ -66,21 +74,107 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        public string Category
+        {
+            get => category;
+            set
+            {
+                category = value;
+                Notify();
+            }
+        }
+        public string SelectedCategory
+        {
+            get => selectedCategory;
+            set
+            {
+                selectedCategory = value;
+                Notify();
+            }
+        }
+        public ObservableCollection<IRecord> UserRecords
+        {
+            get => userRecords;
+            set
+            {
+                userRecords = value;
+                Notify();
+            }
+        }
         #endregion
 
+        #region public properties
         public User User { get; set; }
+        public IRecord SelectedRecord { get; set; }
+        public string SelectedTheme { get; set; }
+        public string SelectedLanguage { get; set; }
+        #endregion
 
-        public MainWindowViewModel(User user)
+        public MainWindowViewModel(User user, IRepository<User> users)
         {
+            SelectedCategory = "All Passwords";
             User = user;
+            usersRepository = users;
 
+
+            //User.Records.Add(new Account("Google", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("Instagram", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("Drive", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("Telegram", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("VK", "note", "google.com", "username", "pass", "Website Accounts"));
+            //User.Records.Add(new Account("WhatsApp", "note", "google.com", "username", "pass", "Website Accounts"));
+
+
+
+            UserRecords = new ObservableCollection<IRecord>(User.Records);
             AddRecordCommand = new RelayCommand(AddRecordMethod);
+            DeleteRecordCommand = new RelayCommand(DeleteRecordMethod);
             SortCommand = new RelayCommand(SortMethod);
-            PopupCloseCommand = new RelayCommand(
-                x =>
-                {
-                    Title = Note = Password = Username = WebsiteName = "";
-                });
+            SearchCommand = new RelayCommand(SearchMethod);
+            ChangeCategoryCommand = new RelayCommand(ChangeCategoryMethod);
+            CloseAddRecordPopupCommand = new RelayCommand(CleanProperties);
+            GeneratePasswordCommand = new RelayCommand(x => Password = PasswordGenerator.Generate(new Random().Next(8, 20), PasswordCharacters.AllLetters | PasswordCharacters.Numbers));
+        }
+
+        public void CloseWindow(IWindow wnd)
+        {
+            MessageBox.Show("close window");
+            wnd.CloseWindow();
+        }
+
+        public void ChangeLanguage(string language)
+        {
+            Application.Current.Resources.MergedDictionaries[6].Source = new Uri($@"Languages\{language}.xaml", UriKind.RelativeOrAbsolute);
+        }
+
+        public void ChangeTheme(string theme)
+        {
+            string tm = theme.Contains("Dark") ? "Dark" : "Light";
+            Application.Current.Resources.MergedDictionaries[5].Source = new Uri($@"Style\{theme}.xaml", UriKind.RelativeOrAbsolute);
+            Application.Current.Resources.MergedDictionaries[1].Source = new Uri($@"pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.{tm}.xaml", UriKind.RelativeOrAbsolute);
+        }
+
+        private void CleanProperties(object obj)
+        {
+            Title = Note = Password = Username = WebsiteName = "";
+        }
+
+        private void SearchMethod(object obj)
+        {
+            if (string.IsNullOrEmpty(obj as string))
+            {
+                UserRecords = new ObservableCollection<IRecord>(User.Records);
+                return;
+            }
+
+            string searchString = obj as string;
+            UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Title.Contains(searchString) /*&& x.Category == SelectedCategory*/));
+        }
+
+        private void DeleteRecordMethod(object obj)
+        {
+            UserRecords.Remove(SelectedRecord);
+            User.Records.Remove(SelectedRecord);
         }
 
         private void SortMethod(object obj)
@@ -89,17 +183,52 @@ namespace PassKeeper_WPF
             {
                 case "Title":
                     {
-                        User.Records = new ObservableCollection<IRecord>(User.Records.OrderBy(x => x.Title));
+                        UserRecords = new ObservableCollection<IRecord>(UserRecords.OrderBy(x => x.Title));
                     }
                     break;
                 case "WebsiteName":
                     {
-                        User.Records = new ObservableCollection<IRecord>(User.Records.OrderBy(x => x.WebsiteName));
+                        UserRecords = new ObservableCollection<IRecord>(UserRecords.OrderBy(x => x.WebsiteName));
                     }
                     break;
                 case "Date":
                     {
-                        User.Records = new ObservableCollection<IRecord>(User.Records.OrderBy(x => x.CreationDate));
+                        UserRecords = new ObservableCollection<IRecord>(UserRecords.OrderBy(x => x.CreationDate));
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ChangeCategoryMethod(object obj)
+        {
+            SelectedCategory = obj as string;
+            switch (obj as String)
+            {
+                case "All Passwords":
+                    {
+                        UserRecords = new ObservableCollection<IRecord>(User.Records);
+                    }
+                    break;
+                case "Website Accounts":
+                    {
+                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Website Accounts"));
+                    }
+                    break;
+                case "Email Accounts":
+                    {
+                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Email Accounts"));
+                    }
+                    break;
+                case "Credit Cards":
+                    {
+                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Credit Cards"));
+                    }
+                    break;
+                case "Favorites":
+                    {
+                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.IsFavorite));
                     }
                     break;
                 default:
@@ -109,20 +238,34 @@ namespace PassKeeper_WPF
 
         private void AddRecordMethod(object obj)
         {
-            User.Records.Add(new Account(Title, Note, WebsiteName, Username, Password));
-        }
+            try
+            {
+                Category = String.IsNullOrEmpty(Category) ? "Website Accounts" : Category.Remove(0, 38);
+            }
+            catch (Exception ex) { }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void Notify([CallerMemberName] string propName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            var account = new Account(Title, Note, WebsiteName, Username, Password, Category);
+            User.Records.Add(account);
+            UserRecords.Add(account);
+            //usersRepository.Update(User);
         }
 
         #region Commands
         public ICommand AddRecordCommand { get; set; }
+        public ICommand DeleteRecordCommand { get; set; }
         public ICommand SortCommand { get; set; }
-        public ICommand PopupCloseCommand { get; set; }
+        public ICommand CloseAddRecordPopupCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public ICommand ChangeCategoryCommand { get; set; }
+        public ICommand GeneratePasswordCommand { get; set; }
+        #endregion
+
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void Notify([CallerMemberName] string propName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
         #endregion
     }
 }

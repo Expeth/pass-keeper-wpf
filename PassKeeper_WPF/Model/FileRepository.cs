@@ -3,27 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace PassKeeper_WPF
 {
     public class FileRepository<T> : IRepository<T>
                                      where T : class
     {
+        private string fileName;
         private IList<T> items;
 
         public FileRepository()
         {
-            items = new List<T>();
+            this.fileName = "users.bin";
+            Load();
         }
 
         public void Create(T item)
         {
             items.Add(item);
+            Save();
         }
 
         public void Delete(T item)
         {
             items.Remove(item);
+            Save();
         }
 
         public T GetById(int id)
@@ -36,14 +42,34 @@ namespace PassKeeper_WPF
             return items;
         }
 
-        public void Save()
+        private void Load()
         {
-            throw new NotImplementedException();
+            BinaryFormatter bn = new BinaryFormatter();
+            using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
+            {
+                try
+                {
+                    items = (List<T>)bn.Deserialize(fs);
+                }
+                catch (Exception)
+                {
+                    items = new List<T>();
+                }
+            }
+        }
+
+        private void Save()
+        {
+            BinaryFormatter bn = new BinaryFormatter();
+            using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
+            {
+                bn.Serialize(fs, items);
+            }
         }
 
         public void Update(T item)
         {
-            throw new NotImplementedException();
+            Save();
         }
     }
 }

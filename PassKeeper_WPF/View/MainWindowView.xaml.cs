@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PassKeeper_WPF
@@ -18,16 +17,17 @@ namespace PassKeeper_WPF
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class MainWindowView : Window, IWindow
     {
-        public LoginWindow()
+        public MainWindowView()
         {
             InitializeComponent();
+           // WindowBlur.SetIsEnabled(this, true);
         }
 
         public void CloseWindow()
         {
-            Close();
+            this.Close();
         }
     }
 }
