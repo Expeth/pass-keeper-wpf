@@ -28,6 +28,16 @@ namespace PassKeeper_WPF
             }
         }
 
+        public string Username
+        {
+            get => username;
+            set
+            {
+                username = value;
+                Notify();
+            }
+        }
+
         public string Name
         {
             get => name;

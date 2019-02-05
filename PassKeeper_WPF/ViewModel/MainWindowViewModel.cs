@@ -108,10 +108,12 @@ namespace PassKeeper_WPF
         public IRecord SelectedRecord { get; set; }
         public string SelectedTheme { get; set; }
         public string SelectedLanguage { get; set; }
+        private ConfigSaver ConfigSaver { get; set; }
         #endregion
 
-        public MainWindowViewModel(User user, IRepository<User> users)
+        public MainWindowViewModel(User user, IRepository<User> users, ConfigSaver cs)
         {
+            ConfigSaver = cs;
             SelectedCategory = "All Passwords";
             User = user;
             usersRepository = users;
@@ -144,14 +146,14 @@ namespace PassKeeper_WPF
 
         public void ChangeLanguage(string language)
         {
-            Application.Current.Resources.MergedDictionaries[6].Source = new Uri($@"Languages\{language}.xaml", UriKind.RelativeOrAbsolute);
+            ConfigSaver.Config.Language = language;
+            ConfigSaver.Save();
         }
 
         public void ChangeTheme(string theme)
         {
-            string tm = theme.Contains("Dark") ? "Dark" : "Light";
-            Application.Current.Resources.MergedDictionaries[5].Source = new Uri($@"Style\{theme}.xaml", UriKind.RelativeOrAbsolute);
-            Application.Current.Resources.MergedDictionaries[1].Source = new Uri($@"pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.{tm}.xaml", UriKind.RelativeOrAbsolute);
+            ConfigSaver.Config.Theme = theme;
+            ConfigSaver.Save();
         }
 
         private void CleanProperties(object obj)
@@ -247,7 +249,7 @@ namespace PassKeeper_WPF
             var account = new Account(Title, Note, WebsiteName, Username, Password, Category);
             User.Records.Add(account);
             UserRecords.Add(account);
-            //usersRepository.Update(User);
+            usersRepository.Update(User);
         }
 
         #region Commands

@@ -14,6 +14,7 @@ namespace PassKeeper_WPF
 {
     public class LoginWindowViewModel : PropertyChangedBase
     {
+        private ConfigSaver configSaver;
         private IRepository<User> users;
         private IWindowManager windowManager;
         private string info;
@@ -31,6 +32,8 @@ namespace PassKeeper_WPF
 
         public LoginWindowViewModel(IRepository<User> repository, IWindowManager windowManager)
         {
+            configSaver = new ConfigSaver("ApplicationConfiguration.json");
+            configSaver.Config.Configure();
             InformationString = "";
             users = repository;
             this.windowManager = windowManager;
@@ -73,7 +76,7 @@ namespace PassKeeper_WPF
             }
             InformationString = "Logged in";
 
-            windowManager.ShowWindow(new MainWindowViewModel(res, users));
+            windowManager.ShowWindow(new MainWindowViewModel(res, users, configSaver));
             wnd.CloseWindow();
         }
     }
