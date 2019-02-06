@@ -56,7 +56,7 @@ namespace PassKeeper_WPF
                                                     $"{rec["WebsiteName"]}", 
                                                     $"{rec["Username"]}", 
                                                     $"{rec["Password"]}", 
-                                                    $"{rec["Category"]}");
+                                                    Convert.ToInt32($"{rec["Category"]}"));
                         user.Records.Add(tmpRecord);
                     }
                 }

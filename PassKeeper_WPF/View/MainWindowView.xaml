@@ -294,36 +294,40 @@
                         <Border Padding="20 20 20 0" Width="0" Name="AddRecordDialog" CornerRadius="5" DockPanel.Dock="Right" Visibility="Hidden" Background="{DynamicResource PrimaryBackgroundColor}">
                             <StackPanel>
                                 <TextBlock Text="{DynamicResource Title}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
+                                <TextBox Margin="0 8 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding Title}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource UsernameRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
+                                <TextBlock Margin="0 7 0 0" FontSize="12" Text="{DynamicResource UsernameRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                <TextBox Margin="0 7 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding Username}"></TextBox>
                                 <WrapPanel>
-                                    <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource PasswordRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
-                                    <Button FontSize="10" Margin="15 15 0 0" HorizontalAlignment="Right" Style="{DynamicResource MenuItemButton}" Content="(Generate)"
-                                            Command="{Binding GeneratePasswordCommand}"/>
+                                    <TextBlock Margin="0 7 0 0" FontSize="12" Text="{DynamicResource PasswordRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                    <Button FontSize="10" Margin="15 7 0 0" HorizontalAlignment="Right" Style="{DynamicResource MenuItemButton}" Content="(Generate)"
+                                            Command="{Binding GeneratePasswordCommand}"
+                                            CommandParameter="AddRecord"/>
                                 </WrapPanel>
-                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
+                                <TextBox Margin="0 7 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding Password}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource WebsiteRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
-                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
+                                <TextBlock Margin="0 7 0 0" FontSize="12" Text="{DynamicResource WebsiteRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                <TextBox Margin="0 7 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding WebsiteName}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource CategoryRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
-                                <ComboBox Margin="10" SelectedItem="{Binding Category}">
+                                <TextBlock Margin="0 7 0 0" Text="{DynamicResource Note}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBox Margin="0 7 0 0" Style="{DynamicResource TextBoxStyle}"
+                                         Text="{Binding Note}"></TextBox>
+                                <TextBlock Margin="0 7 0 0" FontSize="12" Text="{DynamicResource CategoryRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
+                                <ComboBox Name="cbbx1" SelectedIndex="0" Margin="10">
                                     <ComboBoxItem Name="WebsiteAccounts" Content="{DynamicResource WebsiteAccounts}"/>
                                     <ComboBoxItem Name="EmailAccounts" Content="{DynamicResource EmailAccounts}"/>
                                     <ComboBoxItem Name="CreditCards" Content="{DynamicResource CreditCards}"/>
                                 </ComboBox>
-                                <Button Margin="0 15 0 0" 
+                                <Button Margin="0 7 0 0" 
                                         Name="AddRecordButton"
                                         Content="{DynamicResource AddRecord}"
-                                        Command="{Binding AddRecordCommand}">
+                                        Command="{Binding AddRecordCommand}"
+                                        CommandParameter="{Binding ElementName=cbbx1, Path=SelectedIndex}">
                                 </Button>
-                                <Button Margin="0 15 0 0" 
+                                <Button Margin="0 7 0 0" 
                                         Name="CloseAddRecordDialogButton"
                                         Content="{DynamicResource Cancel}">
-
                                 </Button>
                             </StackPanel>
                         </Border>
@@ -333,25 +337,29 @@
                                 <TextBlock Text="{DynamicResource Title}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.Title}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" Text="{DynamicResource UsernameRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBlock Margin="0 10 0 0" Text="{DynamicResource UsernameRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.Username}"></TextBox>
                                 <WrapPanel>
-                                    <TextBlock Margin="0 15 0 0" Text="{DynamicResource PasswordRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                    <Button FontSize="10" Margin="15 15 0 0" HorizontalAlignment="Right" Style="{DynamicResource MenuItemButton}" Content="(Generate)"/>
+                                    <TextBlock Margin="0 10 0 0" Text="{DynamicResource PasswordRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                    <Button FontSize="10" Margin="15 10 0 0" HorizontalAlignment="Right" Style="{DynamicResource MenuItemButton}" Content="(Generate)"
+                                            Command="{Binding GeneratePasswordCommand}"/>
                                 </WrapPanel>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.Password}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" Text="{DynamicResource WebsiteName}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBlock Margin="0 10 0 0" Text="{DynamicResource WebsiteName}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.WebsiteName}"></TextBox>
-                                <TextBlock Margin="0 15 0 0" Text="Category" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                <ComboBox Margin="10" SelectedValue="{Binding Category}">
+                                <TextBlock Margin="0 10 0 0" Text="{DynamicResource Note}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.Note}"></TextBox>
+                                <TextBlock Margin="0 10 0 0" Text="Category" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <ComboBox Margin="10" SelectedIndex="{Binding ElementName=Records, Path=SelectedValue.Category}">
                                     <ComboBoxItem Content="{DynamicResource WebsiteAccounts}"/>
                                     <ComboBoxItem Content="{DynamicResource EmailAccounts}"/>
                                     <ComboBoxItem Content="{DynamicResource CreditCards}"/>
                                 </ComboBox>
-                                <Button Margin="0 15 0 0" Name="CloseEditRecordDialogButton"  Content="{DynamicResource Cancel}"></Button>
+                                <Button Margin="0 10 0 0" Name="CloseEditRecordDialogButton" Content="{DynamicResource Cancel}"></Button>
                             </StackPanel>
                         </Border>
 

@@ -17,7 +17,7 @@ namespace PassKeeper_WPF
         private string websiteName;
         private string username;
         private string password;
-        private string category;
+        private int category;
         private bool isFavorite;
 
         public Account()
@@ -26,19 +26,19 @@ namespace PassKeeper_WPF
             Note =
             WebsiteName =
             Username =
-            Password =
-            Category = "";
+            Password = "";
             CreationDate = DateTime.Now;
+            category = 0;
         }
 
-        public Account(string title, string note, string websiteName, string username, string password, string category)
+        public Account(string title, string note, string websiteName, string username, string password, int category)
         {
             Title = title == null ? "" : title;
             Note = note == null ? "" : note;
             WebsiteName = websiteName == null ? "" : websiteName;
             Username = username == null ? "" : username;
             Password = password == null ? "" : password;
-            Category = category == null ? "" : category;
+            Category = category;
             CreationDate = DateTime.Now;
         }
 
@@ -93,8 +93,7 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
-        [JsonConverter(typeof(EncryptingJsonConverter), "category_decryptkey")]
-        public string Category
+        public int Category
         {
             get => category;
             set

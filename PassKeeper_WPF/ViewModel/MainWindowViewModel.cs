@@ -22,8 +22,6 @@ namespace PassKeeper_WPF
         private string password;
         private string note;
         private string websiteName;
-        private string category;
-        private string selectedCategory;
         private ObservableCollection<Account> userRecords;
         private IRepository usersRepository;
         #endregion
@@ -74,24 +72,6 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
-        public string Category
-        {
-            get => category;
-            set
-            {
-                category = value;
-                Notify();
-            }
-        }
-        public string SelectedCategory
-        {
-            get => selectedCategory;
-            set
-            {
-                selectedCategory = value;
-                Notify();
-            }
-        }
         public ObservableCollection<Account> UserRecords
         {
             get => userRecords;
@@ -108,13 +88,12 @@ namespace PassKeeper_WPF
         public Account SelectedRecord { get; set; }
         public string SelectedTheme { get; set; }
         public string SelectedLanguage { get; set; }
-        private ConfigSaver ConfigSaver { get; set; }
+        private ConfigSaver configSaver;
         #endregion
 
         public MainWindowViewModel(User user, IRepository users, ConfigSaver cs)
         {
-            ConfigSaver = cs;
-            SelectedCategory = "All Passwords";
+            configSaver = cs;
             User = user;
             usersRepository = users;
 
@@ -125,8 +104,17 @@ namespace PassKeeper_WPF
             SortCommand = new RelayCommand(SortMethod);
             SearchCommand = new RelayCommand(SearchMethod);
             ChangeCategoryCommand = new RelayCommand(ChangeCategoryMethod);
-            CloseAddRecordPopupCommand = new RelayCommand(CleanProperties);
-            GeneratePasswordCommand = new RelayCommand(x => Password = PasswordGenerator.Generate(new Random().Next(8, 20), PasswordCharacters.AllLetters | PasswordCharacters.Numbers));
+            GeneratePasswordCommand = new RelayCommand(GeneratePasswordMethod);
+        }
+
+        private void GeneratePasswordMethod(object obj)
+        {
+            if ((obj as string) == "AddRecord")
+            {
+                Password = PasswordGenerator.Generate(new Random().Next(8, 20), PasswordCharacters.AllLetters | PasswordCharacters.Numbers);
+                return;
+            }
+            SelectedRecord.Password = PasswordGenerator.Generate(new Random().Next(8, 20), PasswordCharacters.AllLetters | PasswordCharacters.Numbers);
         }
 
         public void CloseWindow(IWindow wnd)
@@ -146,36 +134,25 @@ namespace PassKeeper_WPF
 
         public void ChangeLanguage(string language)
         {
-            ConfigSaver.Config.Language = language;
-            ConfigSaver.Save();
+            configSaver.Config.Language = language;
+            configSaver.Save();
         }
 
         public void ChangeTheme(string theme)
         {
-            ConfigSaver.Config.Theme = theme;
-            ConfigSaver.Save();
+            configSaver.Config.Theme = theme;
+            configSaver.Save();
         }
 
-        private void CleanProperties(object obj)
+        private void CleanProperties()
         {
             Title = Note = Password = Username = WebsiteName = "";
         }
 
         private void SearchMethod(object obj)
         {
-            if (string.IsNullOrEmpty(obj as string))
-            {
-                UserRecords = new ObservableCollection<Account>(User.Records);
-                return;
-            }
-
             string searchString = obj as string;
-            UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Title.Contains(searchString) /*&& x.Category == SelectedCategory*/));
-        }
-
-        public void BnClick()
-        {
-            MessageBox.Show("12312312");
+            UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Title.Contains(searchString)));
         }
 
         private void DeleteRecordMethod(object obj)
@@ -211,7 +188,6 @@ namespace PassKeeper_WPF
 
         private void ChangeCategoryMethod(object obj)
         {
-            SelectedCategory = obj as string;
             switch (obj as String)
             {
                 case "All Passwords":
@@ -221,17 +197,17 @@ namespace PassKeeper_WPF
                     break;
                 case "Website Accounts":
                     {
-                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == "Website Accounts"));
+                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == 0));
                     }
                     break;
                 case "Email Accounts":
                     {
-                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == "Email Accounts"));
+                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == 1));
                     }
                     break;
                 case "Credit Cards":
                     {
-                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == "Credit Cards"));
+                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == 2));
                     }
                     break;
                 case "Favorites":
@@ -246,27 +222,21 @@ namespace PassKeeper_WPF
 
         private void AddRecordMethod(object obj)
         {
-            try
-            {
-                Category = String.IsNullOrEmpty(Category) ? "Website Accounts" : Category.Remove(0, 38);
-            }
-            catch (Exception ex) { }
-
-            var account = new Account(Title, Note, WebsiteName, Username, Password, Category);
+            var account = new Account(Title, Note, WebsiteName, Username, Password, (int)obj);
             User.Records.Add(account);
             UserRecords.Add(account);
             usersRepository.Update(User);
+            CleanProperties();
         }
 
         #region Commands
         public ICommand AddRecordCommand { get; set; }
         public ICommand DeleteRecordCommand { get; set; }
         public ICommand SortCommand { get; set; }
-        public ICommand CloseAddRecordPopupCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand ChangeCategoryCommand { get; set; }
         public ICommand GeneratePasswordCommand { get; set; }
-        public ICommand SaveDataCommand { get; set; } 
+        public ICommand SaveDataCommand { get; set; }
         #endregion
 
         #region PropertyChanged

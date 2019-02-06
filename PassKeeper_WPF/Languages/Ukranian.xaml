@@ -29,6 +29,7 @@
     <sys:String x:Key="UsernameRecord">Ім'я користувача</sys:String>
     <sys:String x:Key="PasswordRecord">Пароль</sys:String>
     <sys:String x:Key="WebsiteRecord">Посилання на сайт</sys:String>
+    <sys:String x:Key="Note">Замiтка</sys:String>
     <sys:String x:Key="CategoryRecord">Категорія</sys:String>
     <sys:String x:Key="Cancel">Скасувати</sys:String>
 </ResourceDictionary>

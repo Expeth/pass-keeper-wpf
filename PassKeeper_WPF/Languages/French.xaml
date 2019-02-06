@@ -29,6 +29,7 @@
     <sys:String x:Key="UsernameRecord">Nom d'utilisateur</sys:String>
     <sys:String x:Key="PasswordRecord">Mot de passe</sys:String>
     <sys:String x:Key="WebsiteRecord">Lien vers le site</sys:String>
+    <sys:String x:Key="Note">Note</sys:String>
     <sys:String x:Key="CategoryRecord">Catégorie</sys:String>
     <sys:String x:Key="Cancel">Annuler</sys:String>
 </ResourceDictionary>

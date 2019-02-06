@@ -29,6 +29,7 @@
     <sys:String x:Key="UsernameRecord">Username</sys:String>
     <sys:String x:Key="PasswordRecord">Password</sys:String>
     <sys:String x:Key="WebsiteRecord">Website URL</sys:String>
+    <sys:String x:Key="Note">Note</sys:String>
     <sys:String x:Key="CategoryRecord">Category</sys:String>
     <sys:String x:Key="Cancel">Cancel</sys:String>
 </ResourceDictionary>
