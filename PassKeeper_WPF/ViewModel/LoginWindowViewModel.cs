@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Security.Cryptography;
 
 namespace PassKeeper_WPF
 {
     public class LoginWindowViewModel : PropertyChangedBase
     {
         private ConfigSaver configSaver;
-        private IRepository<User> users;
+        private IRepository users;
         private IWindowManager windowManager;
         private string info;
 
@@ -30,7 +31,7 @@ namespace PassKeeper_WPF
         }
         public string Username { get; set; }
 
-        public LoginWindowViewModel(IRepository<User> repository, IWindowManager windowManager)
+        public LoginWindowViewModel(IRepository repository, IWindowManager windowManager)
         {
             configSaver = new ConfigSaver("ApplicationConfiguration.json");
             configSaver.Config.Configure();

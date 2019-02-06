@@ -14,6 +14,12 @@
         FontFamily="SF UI Text"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding SaveDataCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <WindowChrome.WindowChrome>
         <WindowChrome CornerRadius="7" ResizeBorderThickness="7"/>
     </WindowChrome.WindowChrome>
@@ -289,9 +295,9 @@
                                          Text="{Binding WebsiteName}"></TextBox>
                                 <TextBlock Margin="0 15 0 0" FontSize="12" Text="{DynamicResource CategoryRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
                                 <ComboBox Margin="10" SelectedItem="{Binding Category}">
-                                    <ComboBoxItem Content="{DynamicResource WebsiteAccounts}"/>
-                                    <ComboBoxItem Content="{DynamicResource EmailAccounts}"/>
-                                    <ComboBoxItem Content="{DynamicResource CreditCards}"/>
+                                    <ComboBoxItem Name="WebsiteAccounts" Content="{DynamicResource WebsiteAccounts}"/>
+                                    <ComboBoxItem Name="EmailAccounts" Content="{DynamicResource EmailAccounts}"/>
+                                    <ComboBoxItem Name="CreditCards" Content="{DynamicResource CreditCards}"/>
                                 </ComboBox>
                                 <Button Margin="0 15 0 0" 
                                         Name="AddRecordButton"

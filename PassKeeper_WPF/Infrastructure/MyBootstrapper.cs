@@ -21,7 +21,7 @@ namespace PassKeeper_WPF
             simpleContainer.Singleton<IWindowManager, WindowManager>();
             simpleContainer.Singleton<IEventAggregator, EventAggregator>();
             simpleContainer.PerRequest<LoginWindowViewModel, LoginWindowViewModel>();
-            simpleContainer.Singleton<IRepository<User>, FileRepository<User>>();
+            simpleContainer.Singleton<IRepository, FileRepository>();
         }
         protected override void BuildUp(object instance)
         {

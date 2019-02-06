@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,10 +16,10 @@ namespace PassKeeper_WPF
         private string name;
         private string username;
         private string password;
+        private ObservableCollection<Account> records;
 
-        private ObservableCollection<IRecord> records;
-
-        public ObservableCollection<IRecord> Records
+        #region public properties
+        public ObservableCollection<Account> Records
         {
             get => records;
             set
@@ -28,6 +29,17 @@ namespace PassKeeper_WPF
             }
         }
 
+        [JsonConverter(typeof(EncryptingJsonConverter), "userpassword_decryptkey")]
+        public string Password
+        {
+            get => password;
+            set
+            {
+                password = value;
+            }
+        }
+
+        [JsonConverter(typeof(EncryptingJsonConverter), "username_decryptkey")]
         public string Username
         {
             get => username;
@@ -38,6 +50,7 @@ namespace PassKeeper_WPF
             }
         }
 
+        [JsonConverter(typeof(EncryptingJsonConverter), "name_decryptkey")]
         public string Name
         {
             get => name;
@@ -48,9 +61,14 @@ namespace PassKeeper_WPF
             }
         }
 
+        public int Id { get; set; }
+
+        public object Tag { get; set; }
+        #endregion
+
         public User(string username, string password)
         {
-            Records = new ObservableCollection<IRecord>();
+            Records = new ObservableCollection<Account>();
             this.username = Name = username;
             this.password = password;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,6 +20,17 @@ namespace PassKeeper_WPF
         private string category;
         private bool isFavorite;
 
+        public Account()
+        {
+            Title =
+            Note =
+            WebsiteName =
+            Username =
+            Password =
+            Category = "";
+            CreationDate = DateTime.Now;
+        }
+
         public Account(string title, string note, string websiteName, string username, string password, string category)
         {
             Title = title == null ? "" : title;
@@ -31,6 +43,7 @@ namespace PassKeeper_WPF
         }
 
         #region Properties
+        [JsonConverter(typeof(EncryptingJsonConverter), "title_decryptkey")]
         public string Title
         {
             get => title;
@@ -40,6 +53,7 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        [JsonConverter(typeof(EncryptingJsonConverter), "note_decryptkey")]
         public string Note
         {
             get => note;
@@ -49,6 +63,7 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        [JsonConverter(typeof(EncryptingJsonConverter), "websitename_decryptkey")]
         public string WebsiteName
         {
             get => websiteName;
@@ -58,6 +73,7 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        [JsonConverter(typeof(EncryptingJsonConverter), "username_decryptkey")]
         public string Username
         {
             get => username;
@@ -67,6 +83,7 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        [JsonConverter(typeof(EncryptingJsonConverter), "password_decryptkey")]
         public string Password
         {
             get => password;
@@ -76,6 +93,7 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
+        [JsonConverter(typeof(EncryptingJsonConverter), "category_decryptkey")]
         public string Category
         {
             get => category;

@@ -24,8 +24,8 @@ namespace PassKeeper_WPF
         private string websiteName;
         private string category;
         private string selectedCategory;
-        private ObservableCollection<IRecord> userRecords;
-        private IRepository<User> usersRepository;
+        private ObservableCollection<Account> userRecords;
+        private IRepository usersRepository;
         #endregion
 
         #region public properties with Notify()
@@ -92,7 +92,7 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
-        public ObservableCollection<IRecord> UserRecords
+        public ObservableCollection<Account> UserRecords
         {
             get => userRecords;
             set
@@ -105,30 +105,21 @@ namespace PassKeeper_WPF
 
         #region public properties
         public User User { get; set; }
-        public IRecord SelectedRecord { get; set; }
+        public Account SelectedRecord { get; set; }
         public string SelectedTheme { get; set; }
         public string SelectedLanguage { get; set; }
         private ConfigSaver ConfigSaver { get; set; }
         #endregion
 
-        public MainWindowViewModel(User user, IRepository<User> users, ConfigSaver cs)
+        public MainWindowViewModel(User user, IRepository users, ConfigSaver cs)
         {
             ConfigSaver = cs;
             SelectedCategory = "All Passwords";
             User = user;
             usersRepository = users;
 
-
-            //User.Records.Add(new Account("Google", "note", "google.com", "username", "pass", "Website Accounts"));
-            //User.Records.Add(new Account("Instagram", "note", "google.com", "username", "pass", "Website Accounts"));
-            //User.Records.Add(new Account("Drive", "note", "google.com", "username", "pass", "Website Accounts"));
-            //User.Records.Add(new Account("Telegram", "note", "google.com", "username", "pass", "Website Accounts"));
-            //User.Records.Add(new Account("VK", "note", "google.com", "username", "pass", "Website Accounts"));
-            //User.Records.Add(new Account("WhatsApp", "note", "google.com", "username", "pass", "Website Accounts"));
-
-
-
-            UserRecords = new ObservableCollection<IRecord>(User.Records);
+            SaveDataCommand = new RelayCommand(x => usersRepository.Update(null));
+            UserRecords = new ObservableCollection<Account>(User.Records);
             AddRecordCommand = new RelayCommand(AddRecordMethod);
             DeleteRecordCommand = new RelayCommand(DeleteRecordMethod);
             SortCommand = new RelayCommand(SortMethod);
@@ -165,18 +156,19 @@ namespace PassKeeper_WPF
         {
             if (string.IsNullOrEmpty(obj as string))
             {
-                UserRecords = new ObservableCollection<IRecord>(User.Records);
+                UserRecords = new ObservableCollection<Account>(User.Records);
                 return;
             }
 
             string searchString = obj as string;
-            UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Title.Contains(searchString) /*&& x.Category == SelectedCategory*/));
+            UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Title.Contains(searchString) /*&& x.Category == SelectedCategory*/));
         }
 
         private void DeleteRecordMethod(object obj)
         {
-            UserRecords.Remove(SelectedRecord);
             User.Records.Remove(SelectedRecord);
+            UserRecords.Remove(SelectedRecord);
+            usersRepository.Update(User);
         }
 
         private void SortMethod(object obj)
@@ -185,17 +177,17 @@ namespace PassKeeper_WPF
             {
                 case "Title":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(UserRecords.OrderBy(x => x.Title));
+                        UserRecords = new ObservableCollection<Account>(UserRecords.OrderBy(x => x.Title));
                     }
                     break;
                 case "WebsiteName":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(UserRecords.OrderBy(x => x.WebsiteName));
+                        UserRecords = new ObservableCollection<Account>(UserRecords.OrderBy(x => x.WebsiteName));
                     }
                     break;
                 case "Date":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(UserRecords.OrderBy(x => x.CreationDate));
+                        UserRecords = new ObservableCollection<Account>(UserRecords.OrderBy(x => x.CreationDate));
                     }
                     break;
                 default:
@@ -210,27 +202,27 @@ namespace PassKeeper_WPF
             {
                 case "All Passwords":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(User.Records);
+                        UserRecords = new ObservableCollection<Account>(User.Records);
                     }
                     break;
                 case "Website Accounts":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Website Accounts"));
+                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == "Website Accounts"));
                     }
                     break;
                 case "Email Accounts":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Email Accounts"));
+                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == "Email Accounts"));
                     }
                     break;
                 case "Credit Cards":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.Category == "Credit Cards"));
+                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Category == "Credit Cards"));
                     }
                     break;
                 case "Favorites":
                     {
-                        UserRecords = new ObservableCollection<IRecord>(User.Records.Where(x => x.IsFavorite));
+                        UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.IsFavorite));
                     }
                     break;
                 default:
@@ -260,6 +252,7 @@ namespace PassKeeper_WPF
         public ICommand SearchCommand { get; set; }
         public ICommand ChangeCategoryCommand { get; set; }
         public ICommand GeneratePasswordCommand { get; set; }
+        public ICommand SaveDataCommand { get; set; } 
         #endregion
 
         #region PropertyChanged

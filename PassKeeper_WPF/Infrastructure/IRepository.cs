@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace PassKeeper_WPF
 {
-    public interface IRepository<T>
-                    where T : class
+    public interface IRepository
     {
-        IEnumerable<T> GetAll();
-        T GetById(int id);
-        void Create(T item);
-        void Update(T item);
-        void Delete(T item);
+        IEnumerable<User> GetAll();
+        User GetById(int id);
+        void Create(User item);
+        void Update(User item);
+        void Delete(User item);
     }
 }
