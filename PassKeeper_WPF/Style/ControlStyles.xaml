@@ -186,6 +186,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="IsSelected" Value="True"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <DataTemplate x:Key="CardListViewItemDataTemplate" DataType="{x:Type local:IRecord}">
@@ -218,9 +223,21 @@
                             Foreground="{DynamicResource ForegroundColor}"
                             Command="{Binding Path=DataContext.DeleteRecordCommand,
                                       RelativeSource={RelativeSource AncestorType={x:Type local:MainWindowView}}}"
+                            CommandParameter=""
                             Width="30" Height="30" Background="{DynamicResource PrimaryBackgroundColor}">
                         <md:PackIcon
                             Kind="Delete"
+                            Height="20"
+                            Width="20" Foreground="{DynamicResource AccentColor}"/>
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                            Margin="5"
+                            Name="EditRecordButton"
+                            BorderThickness="0"
+                            Foreground="{DynamicResource ForegroundColor}"
+                            Width="30" Height="30" Background="{DynamicResource PrimaryBackgroundColor}">
+                        <md:PackIcon
+                            Kind="Edit"
                             Height="20"
                             Width="20" Foreground="{DynamicResource AccentColor}"/>
                     </Button>

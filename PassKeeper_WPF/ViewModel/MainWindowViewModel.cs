@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using CodeBits;
 
 namespace PassKeeper_WPF
@@ -90,7 +91,7 @@ namespace PassKeeper_WPF
         public string SelectedLanguage { get; set; }
         private ConfigSaver configSaver;
         #endregion
-
+        
         public MainWindowViewModel(User user, IRepository users, ConfigSaver cs)
         {
             configSaver = cs;
@@ -105,7 +106,7 @@ namespace PassKeeper_WPF
             SearchCommand = new RelayCommand(SearchMethod);
             ChangeCategoryCommand = new RelayCommand(ChangeCategoryMethod);
             GeneratePasswordCommand = new RelayCommand(GeneratePasswordMethod);
-        }
+        } 
 
         private void GeneratePasswordMethod(object obj)
         {

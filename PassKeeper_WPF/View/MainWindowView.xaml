@@ -37,9 +37,9 @@
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseEditRecordDialogButton">
             <BeginStoryboard Storyboard="{DynamicResource CloseEditRecordDialog}"/>
         </EventTrigger>
-        <EventTrigger RoutedEvent="ListView.SelectionChanged" SourceName="Records">
+        <!--<EventTrigger RoutedEvent="SelectionChanged" SourceName="Records">
             <BeginStoryboard Storyboard="{DynamicResource OpenEditRecordDialog}"/>
-        </EventTrigger>
+        </EventTrigger>-->
     </Window.Triggers>
 
     <Border Style="{DynamicResource MainBorderStyle}">
@@ -115,7 +115,7 @@
                     <Grid Grid.Column="2">
                         <TextBlock Style="{DynamicResource TextBlockStyle}" FontSize="10" HorizontalAlignment="Right" Margin="0 15 70 0" Text="{Binding User.Name}"/>
                         <TextBlock Style="{DynamicResource TextBlockStyle}" FontSize="10" HorizontalAlignment="Right" Margin="0 30 70 0" Text="{Binding User.Username}"/>
-                        <md:PopupBox Padding="25" HorizontalAlignment="Right" Margin="0 0 10 0">
+                        <md:PopupBox Foreground="{DynamicResource ForegroundColor}"  Padding="25" HorizontalAlignment="Right" Margin="0 0 10 0">
                             <StackPanel>
                                 <TextBlock HorizontalAlignment="Center" Margin="0 0 0 20" FontSize="20" Text="{DynamicResource Settings}"></TextBlock>
                                 <Grid>
@@ -129,7 +129,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Grid.Column="0" Margin="5 10 5 5" Text="{DynamicResource Language}"></TextBlock>
-                                    <ComboBox Foreground="{DynamicResource ForegroundColor}" Grid.Column="1" Margin="15 5 5 5" FontSize="12">
+                                    <ComboBox BorderBrush="{DynamicResource PrimaryColor}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="1" Margin="15 5 5 5" FontSize="12">
                                         <ComboBoxItem Content="English">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="Selected">
@@ -169,7 +169,7 @@
                                     </ComboBox>
 
                                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="5 10 5 5" Text="{DynamicResource Theme}"></TextBlock>
-                                    <ComboBox Foreground="{DynamicResource ForegroundColor}" Grid.Column="1" Grid.Row="1" Margin="15 5 5 5" FontSize="12">
+                                    <ComboBox BorderBrush="{DynamicResource PrimaryColor}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="1" Grid.Row="1" Margin="15 5 5 5" FontSize="12">
                                         <ComboBoxItem Content="{DynamicResource LightTheme}">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="Selected">
@@ -314,7 +314,7 @@
                                 <TextBox Margin="0 7 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding Note}"></TextBox>
                                 <TextBlock Margin="0 7 0 0" FontSize="12" Text="{DynamicResource CategoryRecord}" Style="{DynamicResource TextBlockStyle}"></TextBlock>
-                                <ComboBox Name="cbbx1" SelectedIndex="0" Margin="10">
+                                <ComboBox BorderBrush="{DynamicResource PrimaryColor}" Foreground="{DynamicResource ForegroundColor}" Name="cbbx1" SelectedIndex="0" Margin="10">
                                     <ComboBoxItem Name="WebsiteAccounts" Content="{DynamicResource WebsiteAccounts}"/>
                                     <ComboBoxItem Name="EmailAccounts" Content="{DynamicResource EmailAccounts}"/>
                                     <ComboBoxItem Name="CreditCards" Content="{DynamicResource CreditCards}"/>
@@ -354,7 +354,7 @@
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.Note}"></TextBox>
                                 <TextBlock Margin="0 10 0 0" Text="Category" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
-                                <ComboBox Margin="10" SelectedIndex="{Binding ElementName=Records, Path=SelectedValue.Category}">
+                                <ComboBox BorderBrush="{DynamicResource PrimaryColor}" Foreground="{DynamicResource ForegroundColor}" Margin="10" SelectedIndex="{Binding ElementName=Records, Path=SelectedValue.Category}">
                                     <ComboBoxItem Content="{DynamicResource WebsiteAccounts}"/>
                                     <ComboBoxItem Content="{DynamicResource EmailAccounts}"/>
                                     <ComboBoxItem Content="{DynamicResource CreditCards}"/>
@@ -377,7 +377,8 @@
                                           ItemTemplate="{DynamicResource CardListViewItemDataTemplate}"
                                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                           ItemsSource="{Binding UserRecords}"
-                                          SelectedValue="{Binding SelectedRecord}">
+                                          SelectedValue="{Binding SelectedRecord}"
+                                          >
                                     <ListView.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel/>

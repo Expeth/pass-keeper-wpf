@@ -60,10 +60,6 @@ namespace PassKeeper_WPF
                 Notify();
             }
         }
-
-        public int Id { get; set; }
-
-        public object Tag { get; set; }
         #endregion
 
         public User(string username, string password)

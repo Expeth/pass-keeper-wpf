@@ -49,7 +49,7 @@ namespace PassKeeper_WPF
             }
 
             var user = new User(Username, (obj as PasswordBox).Password);
-            bool res = (users.GetAll() as List<User>).Exists(x => x.Equals(user));
+            bool res = (users.GetAll() as List<User>).Exists(x => x.Username == user.Username);
             if (res)
             {
                 InformationString = "User already exists!";
