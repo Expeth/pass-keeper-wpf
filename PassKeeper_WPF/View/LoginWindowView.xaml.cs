@@ -29,5 +29,15 @@ namespace PassKeeper_WPF
         {
             Close();
         }
+
+        public void MaximizeWindow()
+        {
+            this.WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        public void MinimizeWindow()
+        {
+            this.WindowState = WindowState.Minimized;
+        }
     }
 }

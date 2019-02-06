@@ -197,7 +197,7 @@
             
             <TextBlock Foreground="{DynamicResource ForegroundColor}" FontWeight="Heavy" HorizontalAlignment="Center" Margin="10" Text="{Binding Title}"></TextBlock>
             <TextBlock Foreground="{DynamicResource ForegroundColor}" HorizontalAlignment="Center" Text="{Binding WebsiteName}" Margin="10 45 10 0"></TextBlock>
-
+            
             <Border Grid.Row="1" Background="{DynamicResource AccentColor}" CornerRadius="7">
                 <WrapPanel>
                     <ToggleButton HorizontalAlignment="Left" Margin="5" Width="30" Height="30" Style="{DynamicResource MaterialDesignActionToggleButton}"
@@ -217,7 +217,7 @@
                             BorderThickness="0"
                             Foreground="{DynamicResource ForegroundColor}"
                             Command="{Binding Path=DataContext.DeleteRecordCommand,
-                                        RelativeSource={RelativeSource AncestorType={x:Type local:MainWindowView}}}"
+                                      RelativeSource={RelativeSource AncestorType={x:Type local:MainWindowView}}}"
                             Width="30" Height="30" Background="{DynamicResource PrimaryBackgroundColor}">
                         <md:PackIcon
                             Kind="Delete"

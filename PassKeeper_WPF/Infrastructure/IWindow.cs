@@ -9,5 +9,7 @@ namespace PassKeeper_WPF
     public interface IWindow
     {
         void CloseWindow();
+        void MaximizeWindow();
+        void MinimizeWindow();
     }
 }

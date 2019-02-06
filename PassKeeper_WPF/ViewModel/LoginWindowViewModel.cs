@@ -80,5 +80,15 @@ namespace PassKeeper_WPF
             windowManager.ShowWindow(new MainWindowViewModel(res, users, configSaver));
             wnd.CloseWindow();
         }
+
+        public void CloseWindow(IWindow wnd)
+        {
+            wnd.CloseWindow();
+        }
+
+        public void MinimizeWindow(IWindow wnd)
+        {
+            wnd.MinimizeWindow();
+        }
     }
 }

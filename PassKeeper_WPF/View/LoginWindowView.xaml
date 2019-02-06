@@ -21,8 +21,24 @@
 
     <Border Style="{DynamicResource LoginWindowMainBorderStyle}">
         <Grid>
-            <Button Style="{DynamicResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15" Background="#FF6258"></Button>
-            <Button Style="{DynamicResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 15 15 15" Background="#FFBF2F"></Button>
+            <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{DynamicResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15" Background="#FF6258">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <cal:ActionMessage MethodName="CloseWindow">
+                            <cal:Parameter Value="{Binding ElementName=LoginWindow}"/>
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button WindowChrome.IsHitTestVisibleInChrome="True" Style="{DynamicResource RoundedButton}" Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 15 15 15" Background="#FFBF2F">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <cal:ActionMessage MethodName="MinimizeWindow">
+                            <cal:Parameter Value="{Binding ElementName=LoginWindow}"/>
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
 
             <StackPanel Margin="100 100 100 0">
                 <TextBlock Style="{DynamicResource TextBlockStyle}" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">PASS KEEPER</TextBlock>

@@ -101,7 +101,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CodeBits\PasswordGenerator.cs" />
-    <Compile Include="Crypting.cs" />
+    <Compile Include="Infrastructure\Crypting.cs" />
     <Compile Include="Infrastructure\Config.cs" />
     <Compile Include="Infrastructure\ConfigSaver.cs" />
     <Compile Include="Infrastructure\IWindow.cs" />

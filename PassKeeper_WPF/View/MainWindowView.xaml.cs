@@ -22,12 +22,21 @@ namespace PassKeeper_WPF
         public MainWindowView()
         {
             InitializeComponent();
-           // WindowBlur.SetIsEnabled(this, true);
         }
 
         public void CloseWindow()
         {
             this.Close();
+        }
+
+        public void MaximizeWindow()
+        {
+            this.WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
+
+        public void MinimizeWindow()
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

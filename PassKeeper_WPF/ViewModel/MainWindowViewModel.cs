@@ -131,8 +131,17 @@ namespace PassKeeper_WPF
 
         public void CloseWindow(IWindow wnd)
         {
-            MessageBox.Show("close window");
             wnd.CloseWindow();
+        }
+
+        public void MaximizeWindow(IWindow wnd)
+        {
+            wnd.MaximizeWindow();
+        }
+
+        public void MinimizeWindow(IWindow wnd)
+        {
+            wnd.MinimizeWindow();
         }
 
         public void ChangeLanguage(string language)
@@ -162,6 +171,11 @@ namespace PassKeeper_WPF
 
             string searchString = obj as string;
             UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Title.Contains(searchString) /*&& x.Category == SelectedCategory*/));
+        }
+
+        public void BnClick()
+        {
+            MessageBox.Show("12312312");
         }
 
         private void DeleteRecordMethod(object obj)
