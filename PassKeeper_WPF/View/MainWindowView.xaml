@@ -37,9 +37,9 @@
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="CloseEditRecordDialogButton">
             <BeginStoryboard Storyboard="{DynamicResource CloseEditRecordDialog}"/>
         </EventTrigger>
-        <!--<EventTrigger RoutedEvent="SelectionChanged" SourceName="Records">
+        <EventTrigger RoutedEvent="MouseLeftButtonUp" SourceName="Records">
             <BeginStoryboard Storyboard="{DynamicResource OpenEditRecordDialog}"/>
-        </EventTrigger>-->
+        </EventTrigger>
     </Window.Triggers>
 
     <Border Style="{DynamicResource MainBorderStyle}">

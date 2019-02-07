@@ -25,6 +25,7 @@ namespace PassKeeper_WPF
         private string websiteName;
         private ObservableCollection<Account> userRecords;
         private IRepository usersRepository;
+        private Account lastSelectedRecord;
         #endregion
 
         #region public properties with Notify()
@@ -86,7 +87,16 @@ namespace PassKeeper_WPF
 
         #region public properties
         public User User { get; set; }
-        public Account SelectedRecord { get; set; }
+        public Account SelectedRecord
+        {
+            get => lastSelectedRecord;
+            set
+            {
+                if (value == null)
+                    return;
+                lastSelectedRecord = value;
+            }
+        }
         public string SelectedTheme { get; set; }
         public string SelectedLanguage { get; set; }
         private ConfigSaver configSaver;

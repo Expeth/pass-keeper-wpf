@@ -256,18 +256,6 @@
                             Height="20"
                             Width="20" Foreground="{DynamicResource PrimaryBackgroundColor}"/>
                     </Button>
-                    <Button Style="{DynamicResource MaterialDesignFloatingActionButton}"
-                            Margin="2"
-                            ToolTip="{DynamicResource ToolTipEditRecord}"
-                            Name="EditRecordButton"
-                            BorderBrush="Transparent"
-                            Foreground="{DynamicResource ForegroundColor}"
-                            Width="30" Height="30" Background="Transparent">
-                        <md:PackIcon
-                            Kind="Edit"
-                            Height="20"
-                            Width="20" Foreground="{DynamicResource PrimaryBackgroundColor}"/>
-                    </Button>
                 </WrapPanel>
             </Border>
         </Grid>
