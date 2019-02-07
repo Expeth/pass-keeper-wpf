@@ -361,7 +361,7 @@
                                 <TextBlock Margin="0 10 0 0" Text="{DynamicResource Note}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
                                          Text="{Binding ElementName=Records, Path=SelectedValue.Note}"></TextBox>
-                                <TextBlock Margin="0 10 0 0" Text="Category" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBlock Margin="0 10 0 0" Text="{DynamicResource CategoryRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <ComboBox BorderBrush="{DynamicResource PrimaryColor}" Foreground="{DynamicResource ForegroundColor}" Margin="10" SelectedIndex="{Binding ElementName=Records, Path=SelectedValue.Category}">
                                     <ComboBoxItem Content="{DynamicResource WebsiteAccounts}"/>
                                     <ComboBoxItem Content="{DynamicResource EmailAccounts}"/>
