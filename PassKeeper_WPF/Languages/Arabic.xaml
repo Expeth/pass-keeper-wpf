@@ -10,7 +10,7 @@
     <sys:String x:Key="SearchTextBox">البحث في PassKeeper...</sys:String>
     <sys:String x:Key="ToolTipDelete">حذف</sys:String>
     <sys:String x:Key="ToolTipFavorite">أضف إلى المفضلة</sys:String>
-    <sys:String x:Key="ToolTipEditRecord">تحرير السجلd</sys:String>
+    <sys:String x:Key="GeneratePassword">توليد</sys:String>
     <sys:String x:Key="ToolTipCopyUsername">نسخ تسجيل الدخول</sys:String>
     <sys:String x:Key="ToolTipCopyPassword">نسخ كلمة المرور</sys:String>
     <sys:String x:Key="Settings">إعدادات</sys:String>
