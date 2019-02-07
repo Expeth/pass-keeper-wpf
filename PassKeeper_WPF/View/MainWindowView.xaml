@@ -9,9 +9,9 @@
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         x:Name="MainWindow"
-        Title="MainWindow" Height="610" Width="1060"
+        Title="MainWindow" Height="610" Width="1060" MinWidth="800" MinHeight="580"
         WindowStartupLocation="CenterScreen"
-        FontFamily="SF UI Text"
+        FontFamily="/Fonts/#SF UI Text Regular"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
     <i:Interaction.Triggers>

@@ -12,7 +12,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="NoResize"
-        FontFamily="SF UI Text"
+        FontFamily="/Fonts/#SF UI Text Regular"
         Title="MainWindow" Height="550" Width="450">
 
     <WindowChrome.WindowChrome>
@@ -41,7 +41,7 @@
             </Button>
 
             <StackPanel Margin="100 100 100 0">
-                <TextBlock Style="{DynamicResource TextBlockStyle}" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">PASS KEEPER</TextBlock>
+                <TextBlock Style="{DynamicResource TextBlockStyle}" FontFamily="/Fonts/#SF UI Text SemiBold"  FontSize="25" HorizontalAlignment="Center">PASS KEEPER</TextBlock>
 
                 <Label Margin="0 30 0 0" Content="{DynamicResource Login}"></Label>
                 <TextBox Style="{DynamicResource TextBoxStyle}" Text="{Binding Username}" HorizontalAlignment="Center" Width="250"></TextBox>
