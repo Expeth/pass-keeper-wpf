@@ -10,6 +10,9 @@
     <sys:String x:Key="SearchTextBox">Шукати у PassKeeper...</sys:String>
     <sys:String x:Key="ToolTipDelete">Вдалити</sys:String>
     <sys:String x:Key="ToolTipFavorite">Додати до обраних</sys:String>
+    <sys:String x:Key="ToolTipEditRecord">Редагувати запис</sys:String>
+    <sys:String x:Key="ToolTipCopyUsername">Скопіювати логін</sys:String>
+    <sys:String x:Key="ToolTipCopyPassword">Скопіювати пароль</sys:String>
     <sys:String x:Key="Settings">Налаштування</sys:String>
     <sys:String x:Key="Language">Мова</sys:String>
     <sys:String x:Key="Theme">Тема</sys:String>

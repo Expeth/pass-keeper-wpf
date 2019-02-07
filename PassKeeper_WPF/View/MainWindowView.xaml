@@ -166,6 +166,15 @@
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                         </ComboBoxItem>
+                                        <ComboBoxItem Content="العربية">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Selected">
+                                                    <cal:ActionMessage MethodName="ChangeLanguage">
+                                                        <cal:Parameter Value="Arabic"></cal:Parameter>
+                                                    </cal:ActionMessage>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBoxItem>
                                     </ComboBox>
 
                                     <TextBlock Grid.Column="0" Grid.Row="1" Margin="5 10 5 5" Text="{DynamicResource Theme}"></TextBlock>

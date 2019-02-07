@@ -113,6 +113,10 @@
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
+    <Page Include="Languages\Arabic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Languages\English.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

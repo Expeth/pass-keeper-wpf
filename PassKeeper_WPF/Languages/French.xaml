@@ -10,6 +10,9 @@
     <sys:String x:Key="SearchTextBox">Cherher au PassKeeper...</sys:String>
     <sys:String x:Key="ToolTipDelete">Enlever</sys:String>
     <sys:String x:Key="ToolTipFavorite">Ajouter aux favoris</sys:String>
+    <sys:String x:Key="ToolTipEditRecord">Modifier l'enregistrement</sys:String>
+    <sys:String x:Key="ToolTipCopyUsername">Copier le login</sys:String>
+    <sys:String x:Key="ToolTipCopyPassword">Copier le mot de passe</sys:String>
     <sys:String x:Key="Settings">Paramètres</sys:String>
     <sys:String x:Key="Language">Langue</sys:String>
     <sys:String x:Key="Theme">Le thème</sys:String>

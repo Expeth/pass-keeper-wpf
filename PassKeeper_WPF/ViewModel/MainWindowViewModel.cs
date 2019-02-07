@@ -106,7 +106,9 @@ namespace PassKeeper_WPF
             SearchCommand = new RelayCommand(SearchMethod);
             ChangeCategoryCommand = new RelayCommand(ChangeCategoryMethod);
             GeneratePasswordCommand = new RelayCommand(GeneratePasswordMethod);
-        } 
+            CopyUsernameCommand = new RelayCommand(x => Clipboard.SetText(SelectedRecord.Username));
+            CopyPasswordCommand = new RelayCommand(x => Clipboard.SetText(SelectedRecord.Password));
+        }
 
         private void GeneratePasswordMethod(object obj)
         {
@@ -153,7 +155,8 @@ namespace PassKeeper_WPF
         private void SearchMethod(object obj)
         {
             string searchString = obj as string;
-            UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Title.Contains(searchString)));
+            UserRecords = new ObservableCollection<Account>(User.Records.Where(x => x.Title.Contains(searchString) ||
+                                                                                    x.WebsiteName.Contains(searchString)));
         }
 
         private void DeleteRecordMethod(object obj)
@@ -238,6 +241,8 @@ namespace PassKeeper_WPF
         public ICommand ChangeCategoryCommand { get; set; }
         public ICommand GeneratePasswordCommand { get; set; }
         public ICommand SaveDataCommand { get; set; }
+        public ICommand CopyUsernameCommand { get; set; }
+        public ICommand CopyPasswordCommand { get; set; }
         #endregion
 
         #region PropertyChanged
