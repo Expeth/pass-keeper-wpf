@@ -15,17 +15,17 @@ namespace PassKeeper_WPF
 {
     public class LoginWindowViewModel : PropertyChangedBase
     {
-        private ConfigSaver configSaver;
-        private IRepository users;
-        private IWindowManager windowManager;
-        private string info;
+        private ConfigSaver _configSaver;
+        private IRepository _users;
+        private IWindowManager _windowManager;
+        private string _info;
 
         public string InformationString
         {
-            get => info;
+            get => _info;
             set
             {
-                info = value;
+                _info = value;
                 NotifyOfPropertyChange(() => InformationString);
             }
         }
@@ -33,11 +33,11 @@ namespace PassKeeper_WPF
 
         public LoginWindowViewModel(IRepository repository, IWindowManager windowManager)
         {
-            configSaver = new ConfigSaver("ApplicationConfiguration.json");
-            configSaver.Config.Configure();
+            _configSaver = new ConfigSaver("ApplicationConfiguration.json");
+            _configSaver.Config.Configure();
             InformationString = "";
-            users = repository;
-            this.windowManager = windowManager;
+            _users = repository;
+            this._windowManager = windowManager;
         }
 
         public void SignUpMethod(object obj)
@@ -49,14 +49,14 @@ namespace PassKeeper_WPF
             }
 
             var user = new User(Username, (obj as PasswordBox).Password);
-            bool res = (users.GetAll() as List<User>).Exists(x => x.Username == user.Username);
+            bool res = (_users.GetAll() as List<User>).Exists(x => x.Username == user.Username);
             if (res)
             {
                 InformationString = "User already exists!";
                 return;
             }
 
-            users.Create(user);
+            _users.Create(user);
             InformationString = "Signed up";
         }
 
@@ -69,7 +69,7 @@ namespace PassKeeper_WPF
             }
 
             var user = new User(Username, (obj as PasswordBox).Password);
-            var res = (users.GetAll() as List<User>).Find(x => x.Equals(user));
+            var res = (_users.GetAll() as List<User>).Find(x => x.Equals(user));
             if (res == null)
             {
                 InformationString = "Incorrect login or password!";
@@ -77,7 +77,7 @@ namespace PassKeeper_WPF
             }
             InformationString = "Logged in";
 
-            windowManager.ShowWindow(new MainWindowViewModel(res, users, configSaver));
+            _windowManager.ShowWindow(new MainWindowViewModel(res, _users, _configSaver));
             wnd.CloseWindow();
         }
 

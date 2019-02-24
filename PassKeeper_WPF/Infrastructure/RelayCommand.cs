@@ -9,23 +9,23 @@ namespace PassKeeper_WPF
 {
     public class RelayCommand : ICommand
     {
-        readonly Action<object> action;
-        readonly Predicate<object> predicate;
+        readonly Action<object> _action;
+        readonly Predicate<object> _predicate;
 
         public RelayCommand(Action<object> a, Predicate<object> p = null)
         {
-            action = a;
-            predicate = p;
+            _action = a;
+            _predicate = p;
         }
 
         public bool CanExecute(object parameter)
         {
-            return predicate == null ? true : predicate(parameter);
+            return _predicate == null ? true : _predicate(parameter);
         }
 
         public void Execute(object parameter)
         {
-            action(parameter);
+            _action(parameter);
         }
 
         public event EventHandler CanExecuteChanged

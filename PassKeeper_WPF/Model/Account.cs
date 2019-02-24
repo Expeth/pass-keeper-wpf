@@ -12,13 +12,13 @@ namespace PassKeeper_WPF
     [Serializable]
     public class Account : IRecord, INotifyPropertyChanged
     {
-        private string title;
-        private string note;
-        private string websiteName;
-        private string username;
-        private string password;
-        private int category;
-        private bool isFavorite;
+        private string _title;
+        private string _note;
+        private string _websiteName;
+        private string _username;
+        private string _password;
+        private int _category;
+        private bool _isFavorite;
 
         public Account()
         {
@@ -28,7 +28,7 @@ namespace PassKeeper_WPF
             Username =
             Password = "";
             CreationDate = DateTime.Now;
-            category = 0;
+            _category = 0;
         }
 
         public Account(string title, string note, string websiteName, string username, string password, int category)
@@ -46,68 +46,68 @@ namespace PassKeeper_WPF
         [JsonConverter(typeof(EncryptingJsonConverter), "title_decryptkey")]
         public string Title
         {
-            get => title;
+            get => _title == null ? "" : _title;
             set
             {
-                title = value;
+                _title = value;
                 Notify();
             }
         }
         [JsonConverter(typeof(EncryptingJsonConverter), "note_decryptkey")]
         public string Note
         {
-            get => note;
+            get => _note;
             set
             {
-                note = value;
+                _note = value;
                 Notify();
             }
         }
         [JsonConverter(typeof(EncryptingJsonConverter), "websitename_decryptkey")]
         public string WebsiteName
         {
-            get => websiteName;
+            get => _websiteName == null ? "" : _websiteName;
             set
             {
-                websiteName = value;
+                _websiteName = value;
                 Notify();
             }
         }
         [JsonConverter(typeof(EncryptingJsonConverter), "username_decryptkey")]
         public string Username
         {
-            get => username;
+            get => _username;
             set
             {
-                username = value;
+                _username = value;
                 Notify();
             }
         }
         [JsonConverter(typeof(EncryptingJsonConverter), "password_decryptkey")]
         public string Password
         {
-            get => password;
+            get => _password;
             set
             {
-                password = value;
+                _password = value;
                 Notify();
             }
         }
         public int Category
         {
-            get => category;
+            get => _category;
             set
             {
-                category = value;
+                _category = value;
                 Notify();
             }
         }
         public bool IsFavorite
         {
-            get => isFavorite;
+            get => _isFavorite;
             set
             {
-                isFavorite = value;
+                _isFavorite = value;
                 Notify();
             }
         }

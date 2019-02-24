@@ -11,18 +11,18 @@ namespace PassKeeper_WPF
 {
     public class FileRepository : IRepository
     {
-        private string fileName;
-        private IList<User> items;
+        private string _fileName;
+        private IList<User> _items;
 
         public FileRepository()
         {
-            this.fileName = "users.json";
+            this._fileName = "users.json";
             Load();
         }
 
         public void Create(User item)
         {
-            items.Add(item);
+            _items.Add(item);
             Save();
         }
 
@@ -33,31 +33,31 @@ namespace PassKeeper_WPF
 
         public User GetById(int id)
         {
-            return items[id];
+            return _items[id];
         }
 
         public IEnumerable<User> GetAll()
         {
-            return items;
+            return _items;
         }
 
         private void Load()
         {
-            if (!File.Exists(fileName) || File.ReadAllText(fileName).Length == 0)
+            if (!File.Exists(_fileName) || File.ReadAllText(_fileName).Length == 0)
             {
-                items = new List<User>();
+                _items = new List<User>();
                 return;
             }
             string json = File.ReadAllText("users.json");
-            items = (JsonConvert.DeserializeObject<List<User>>(json));
+            _items = (JsonConvert.DeserializeObject<List<User>>(json));
         }
 
         private void Save()
         {
             string json;
-            using (StreamWriter sw = new StreamWriter(fileName))
+            using (StreamWriter sw = new StreamWriter(_fileName))
             {
-                json = JsonConvert.SerializeObject(items);
+                json = JsonConvert.SerializeObject(_items);
                 sw.Write(json);
             }
         }

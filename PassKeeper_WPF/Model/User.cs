@@ -13,18 +13,18 @@ namespace PassKeeper_WPF
     [Serializable]
     public class User : INotifyPropertyChanged
     {
-        private string name;
-        private string username;
-        private string password;
-        private ObservableCollection<Account> records;
+        private string _name;
+        private string _username;
+        private string _password;
+        private ObservableCollection<Account> _records;
 
         #region public properties
         public ObservableCollection<Account> Records
         {
-            get => records;
+            get => _records;
             set
             {
-                records = value;
+                _records = value;
                 Notify();
             }
         }
@@ -32,20 +32,20 @@ namespace PassKeeper_WPF
         [JsonConverter(typeof(EncryptingJsonConverter), "userpassword_decryptkey")]
         public string Password
         {
-            get => password;
+            get => _password;
             set
             {
-                password = value;
+                _password = value;
             }
         }
 
         [JsonConverter(typeof(EncryptingJsonConverter), "username_decryptkey")]
         public string Username
         {
-            get => username;
+            get => _username;
             set
             {
-                username = value;
+                _username = value;
                 Notify();
             }
         }
@@ -53,10 +53,10 @@ namespace PassKeeper_WPF
         [JsonConverter(typeof(EncryptingJsonConverter), "name_decryptkey")]
         public string Name
         {
-            get => name;
+            get => _name;
             set
             {
-                name = value;
+                _name = value;
                 Notify();
             }
         }
@@ -65,23 +65,23 @@ namespace PassKeeper_WPF
         public User(string username, string password)
         {
             Records = new ObservableCollection<Account>();
-            this.username = Name = username;
-            this.password = password;
+            this._username = Name = username;
+            this._password = password;
         }
 
         public override bool Equals(object obj)
         {
             var user = obj as User;
             return user != null &&
-                   username == user.username &&
-                   password == user.password;
+                   _username == user._username &&
+                   _password == user._password;
         }
 
         public override int GetHashCode()
         {
             var hashCode = 1710835385;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(username);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(password);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_username);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_password);
             return hashCode;
         }
 

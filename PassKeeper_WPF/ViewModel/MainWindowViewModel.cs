@@ -18,68 +18,69 @@ namespace PassKeeper_WPF
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         #region private fields
-        private string username;
-        private string title;
-        private string password;
-        private string note;
-        private string websiteName;
-        private ObservableCollection<Account> userRecords;
-        private IRepository usersRepository;
-        private Account lastSelectedRecord;
+        private string _username;
+        private string _title;
+        private string _password;
+        private string _note;
+        private string _websiteName;
+        private ObservableCollection<Account> _userRecords;
+        private IRepository _usersRepository;
+        private Account _lastSelectedRecord;
+        private ConfigSaver _configSaver;
         #endregion
 
         #region public properties with Notify()
         public string Username
         {
-            get => username;
+            get => _username;
             set
             {
-                username = value;
+                _username = value;
                 Notify();
             }
         }
         public string Title
         {
-            get => title;
+            get => _title;
             set
             {
-                title = value;
+                _title = value;
                 Notify();
             }
         }
         public string Password
         {
-            get => password;
+            get => _password;
             set
             {
-                password = value;
+                _password = value;
                 Notify();
             }
         }
         public string Note
         {
-            get => note;
+            get => _note;
             set
             {
-                note = value;
+                _note = value;
                 Notify();
             }
         }
         public string WebsiteName
         {
-            get => websiteName;
+            get => _websiteName;
             set
             {
-                websiteName = value;
+                _websiteName = value;
                 Notify();
             }
         }
         public ObservableCollection<Account> UserRecords
         {
-            get => userRecords;
+            get => _userRecords;
             set
             {
-                userRecords = value;
+                _userRecords = value;
                 Notify();
             }
         }
@@ -89,26 +90,25 @@ namespace PassKeeper_WPF
         public User User { get; set; }
         public Account SelectedRecord
         {
-            get => lastSelectedRecord;
+            get => _lastSelectedRecord;
             set
             {
                 if (value == null)
                     return;
-                lastSelectedRecord = value;
+                _lastSelectedRecord = value;
             }
         }
         public string SelectedTheme { get; set; }
         public string SelectedLanguage { get; set; }
-        private ConfigSaver configSaver;
         #endregion
-        
+
         public MainWindowViewModel(User user, IRepository users, ConfigSaver cs)
         {
-            configSaver = cs;
+            _configSaver = cs;
             User = user;
-            usersRepository = users;
+            _usersRepository = users;
 
-            SaveDataCommand = new RelayCommand(x => usersRepository.Update(null));
+            SaveDataCommand = new RelayCommand(x => _usersRepository.Update(null));
             UserRecords = new ObservableCollection<Account>(User.Records);
             AddRecordCommand = new RelayCommand(AddRecordMethod);
             DeleteRecordCommand = new RelayCommand(DeleteRecordMethod);
@@ -147,14 +147,14 @@ namespace PassKeeper_WPF
 
         public void ChangeLanguage(string language)
         {
-            configSaver.Config.Language = language;
-            configSaver.Save();
+            _configSaver.Config.Language = language;
+            _configSaver.Save();
         }
 
         public void ChangeTheme(string theme)
         {
-            configSaver.Config.Theme = theme;
-            configSaver.Save();
+            _configSaver.Config.Theme = theme;
+            _configSaver.Save();
         }
 
         private void CleanProperties()
@@ -173,7 +173,7 @@ namespace PassKeeper_WPF
         {
             User.Records.Remove(SelectedRecord);
             UserRecords.Remove(SelectedRecord);
-            usersRepository.Update(User);
+            _usersRepository.Update(User);
         }
 
         private void SortMethod(object obj)
@@ -239,7 +239,7 @@ namespace PassKeeper_WPF
             var account = new Account(Title, Note, WebsiteName, Username, Password, (int)obj);
             User.Records.Add(account);
             UserRecords.Add(account);
-            usersRepository.Update(User);
+            _usersRepository.Update(User);
             CleanProperties();
         }
 

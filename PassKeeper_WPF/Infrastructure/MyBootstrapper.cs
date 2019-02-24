@@ -10,30 +10,30 @@ namespace PassKeeper_WPF
 {
     class MyBootstrapper:BootstrapperBase
     {
-        private SimpleContainer simpleContainer;
+        private SimpleContainer _simpleContainer;
         public MyBootstrapper()
         {
             Initialize();
         }
         protected override void Configure()
         {
-            simpleContainer = new SimpleContainer();
-            simpleContainer.Singleton<IWindowManager, WindowManager>();
-            simpleContainer.Singleton<IEventAggregator, EventAggregator>();
-            simpleContainer.PerRequest<LoginWindowViewModel, LoginWindowViewModel>();
-            simpleContainer.Singleton<IRepository, FileRepository>();
+            _simpleContainer = new SimpleContainer();
+            _simpleContainer.Singleton<IWindowManager, WindowManager>();
+            _simpleContainer.Singleton<IEventAggregator, EventAggregator>();
+            _simpleContainer.PerRequest<LoginWindowViewModel, LoginWindowViewModel>();
+            _simpleContainer.Singleton<IRepository, FileRepository>();
         }
         protected override void BuildUp(object instance)
         {
-            simpleContainer.BuildUp(instance);
+            _simpleContainer.BuildUp(instance);
         }
         protected override IEnumerable<object> GetAllInstances(Type service)
         {
-            return simpleContainer.GetAllInstances(service);
+            return _simpleContainer.GetAllInstances(service);
         }
         protected override object GetInstance(Type service, string key)
         {
-            return simpleContainer.GetInstance(service, key);
+            return _simpleContainer.GetInstance(service, key);
         }
         protected override void OnStartup(object sender, StartupEventArgs e)
         {

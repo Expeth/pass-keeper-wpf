@@ -9,24 +9,24 @@ namespace PassKeeper_WPF
 {
     public class Config
     {
-        private string theme;
-        private string language;
+        private string _theme;
+        private string _language;
 
         public string Theme
         {
-            get => theme;
+            get => _theme;
             set
             {
-                theme = value;
+                _theme = value;
                 ChangeTheme();
             }
         }
         public string Language
         {
-            get => language;
+            get => _language;
             set
             {
-                language = value;
+                _language = value;
                 ChangeLanguage();
             }
         }

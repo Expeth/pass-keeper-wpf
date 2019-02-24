@@ -10,13 +10,13 @@ namespace PassKeeper_WPF
 {
     public class ConfigSaver
     {
-        private Config config;
+        private Config _config;
         public Config Config
         {
-            get => config;
+            get => _config;
             set
             {
-                config = value;
+                _config = value;
                 Save();
             }
         }
@@ -32,7 +32,7 @@ namespace PassKeeper_WPF
         {
             if (!File.Exists(fileName))
             {
-                config = new Config();
+                _config = new Config();
                 return;
             }
 
@@ -41,7 +41,7 @@ namespace PassKeeper_WPF
             {
                 using (var jr = new JsonTextReader(sr))
                 {
-                    config = js.Deserialize<Config>(jr);
+                    _config = js.Deserialize<Config>(jr);
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace PassKeeper_WPF
             {
                 using (var jw = new JsonTextWriter(sw))
                 {
-                    js.Serialize(jw, config);
+                    js.Serialize(jw, _config);
                 }
             }
         }
