@@ -10,16 +10,25 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Security.Cryptography;
+using PassKeeper_WPF.Infrastructure;
+using PassKeeper_BLL.DTO;
+using PassKeeper_BLL.Managers;
+using PassKeeper_BLL.Infrastructure;
 
 namespace PassKeeper_WPF
 {
     public class LoginWindowViewModel : PropertyChangedBase
     {
+        #region Private Fields
+        private IFactory<IUser> _userFactory;
+        private MyBootstrapper _bootstrapper;
+        private NotifyCollection<IUser> _users;
         private ConfigSaver _configSaver;
-        private IRepository _users;
         private IWindowManager _windowManager;
         private string _info;
+        #endregion
 
+        #region Public Fields
         public string InformationString
         {
             get => _info;
@@ -30,14 +39,17 @@ namespace PassKeeper_WPF
             }
         }
         public string Username { get; set; }
+        #endregion
 
-        public LoginWindowViewModel(IRepository repository, IWindowManager windowManager)
+        public LoginWindowViewModel(IWindowManager windowManager, IManager<IUser> userManager, IFactory<IUser> userFactory)
         {
+            _bootstrapper = (Application.Current.Resources["bootstrapper"] as MyBootstrapper);
             _configSaver = new ConfigSaver("ApplicationConfiguration.json");
+            _users = new NotifyCollection<IUser>(userManager);
             _configSaver.Config.Configure();
-            InformationString = "";
-            _users = repository;
-            this._windowManager = windowManager;
+            _windowManager = windowManager;
+            _info = "";
+            _userFactory = userFactory;
         }
 
         public void SignUpMethod(object obj)
@@ -48,15 +60,19 @@ namespace PassKeeper_WPF
                 return;
             }
 
-            var user = new User(Username, (obj as PasswordBox).Password);
-            bool res = (_users.GetAll() as List<User>).Exists(x => x.Username == user.Username);
+            var user = _userFactory.GetInstance();
+            user.Username = Username;
+            user.Password = (obj as PasswordBox).Password;
+            
+
+            bool res = _users.ToList().Exists(x => x.Username == user.Username);
             if (res)
             {
                 InformationString = "User already exists!";
                 return;
             }
 
-            _users.Create(user);
+            _users.Add(user);
             InformationString = "Signed up";
         }
 
@@ -68,8 +84,11 @@ namespace PassKeeper_WPF
                 return;
             }
 
-            var user = new User(Username, (obj as PasswordBox).Password);
-            var res = (_users.GetAll() as List<User>).Find(x => x.Equals(user));
+            var user = _userFactory.GetInstance();
+            user.Username = Username;
+            user.Password = (obj as PasswordBox).Password;
+
+            var res = _users.ToList().Find(x => x.Username == user.Username && x.Password == user.Password);
             if (res == null)
             {
                 InformationString = "Incorrect login or password!";
@@ -77,7 +96,9 @@ namespace PassKeeper_WPF
             }
             InformationString = "Logged in";
 
-            _windowManager.ShowWindow(new MainWindowViewModel(res, _users, _configSaver));
+            _windowManager.ShowWindow(new MainWindowViewModel(res, _configSaver,
+                                     (IManager<IRecord>)_bootstrapper.Get(typeof(IManager<IRecord>), "RecordManager"),
+                                     (IFactory<IRecord>)_bootstrapper.Get(typeof(IFactory<IRecord>), "RecordFactory")));
             wnd.CloseWindow();
         }
 

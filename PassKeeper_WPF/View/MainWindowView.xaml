@@ -14,12 +14,6 @@
         FontFamily="/Fonts/#SF UI Text Regular"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closed">
-            <i:InvokeCommandAction Command="{Binding SaveDataCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
-    
     <WindowChrome.WindowChrome>
         <WindowChrome CornerRadius="7" ResizeBorderThickness="7"/>
     </WindowChrome.WindowChrome>
@@ -342,27 +336,62 @@
 
                         <Border Padding="20 20 20 0" Width="0" Name="EditRecordDialog" CornerRadius="5" DockPanel.Dock="Right" Visibility="Hidden" Background="{DynamicResource PrimaryBackgroundColor}">
                             <StackPanel>
-                                <TextBlock Text="{DynamicResource Title}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
+                                <TextBlock Text="{DynamicResource Title}"  Style="{DynamicResource TextBlockStyle}" FontSize="12"/>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
-                                         Text="{Binding ElementName=Records, Path=SelectedValue.Title}"></TextBox>
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.Title, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding UpdateRecordCommand}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Margin="0 10 0 0" Text="{DynamicResource UsernameRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
-                                         Text="{Binding ElementName=Records, Path=SelectedValue.Username}"></TextBox>
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.Username}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding UpdateRecordCommand}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <WrapPanel>
                                     <TextBlock Margin="0 10 0 0" Text="{DynamicResource PasswordRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                     <Button FontSize="10" Margin="15 10 0 0" HorizontalAlignment="Right" Style="{DynamicResource MenuItemButton}" Content="{DynamicResource GeneratePassword}"
                                             Command="{Binding GeneratePasswordCommand}"/>
                                 </WrapPanel>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
-                                         Text="{Binding ElementName=Records, Path=SelectedValue.Password}"></TextBox>
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.Password}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding UpdateRecordCommand}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Margin="0 10 0 0" Text="{DynamicResource WebsiteName}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
-                                         Text="{Binding ElementName=Records, Path=SelectedValue.WebsiteName}"></TextBox>
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.WebsiteName, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding UpdateRecordCommand}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Margin="0 10 0 0" Text="{DynamicResource Note}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <TextBox Margin="0 10 0 0" Style="{DynamicResource TextBoxStyle}"
-                                         Text="{Binding ElementName=Records, Path=SelectedValue.Note}"></TextBox>
+                                         Text="{Binding ElementName=Records, Path=SelectedValue.Note}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding UpdateRecordCommand}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
                                 <TextBlock Margin="0 10 0 0" Text="{DynamicResource CategoryRecord}" Style="{DynamicResource TextBlockStyle}" FontSize="12"></TextBlock>
                                 <ComboBox BorderBrush="{DynamicResource PrimaryColor}" Foreground="{DynamicResource ForegroundColor}" Margin="10" SelectedIndex="{Binding ElementName=Records, Path=SelectedValue.Category}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding UpdateRecordCommand}"></i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                     <ComboBoxItem Content="{DynamicResource WebsiteAccounts}"/>
                                     <ComboBoxItem Content="{DynamicResource EmailAccounts}"/>
                                     <ComboBoxItem Content="{DynamicResource CreditCards}"/>

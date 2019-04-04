@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassKeeper_WPF", "PassKeeper_WPF\PassKeeper_WPF.csproj", "{F59140B1-F0A0-43EC-A66D-687BCEDCC466}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassKeeper_DAL", "PassKeeper_DAL\PassKeeper_DAL.csproj", "{50C74DF8-FA84-4F41-8423-31DE577C80FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassKeeper_BLL", "PassKeeper_BLL\PassKeeper_BLL.csproj", "{94E72042-5C92-489B-810B-AEF1C7896674}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{F59140B1-F0A0-43EC-A66D-687BCEDCC466}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F59140B1-F0A0-43EC-A66D-687BCEDCC466}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F59140B1-F0A0-43EC-A66D-687BCEDCC466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50C74DF8-FA84-4F41-8423-31DE577C80FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50C74DF8-FA84-4F41-8423-31DE577C80FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50C74DF8-FA84-4F41-8423-31DE577C80FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50C74DF8-FA84-4F41-8423-31DE577C80FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94E72042-5C92-489B-810B-AEF1C7896674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94E72042-5C92-489B-810B-AEF1C7896674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94E72042-5C92-489B-810B-AEF1C7896674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94E72042-5C92-489B-810B-AEF1C7896674}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
